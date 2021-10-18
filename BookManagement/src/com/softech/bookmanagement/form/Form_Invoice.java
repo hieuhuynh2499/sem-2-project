@@ -5,6 +5,12 @@
  */
 package com.softech.bookmanagement.form;
 
+import com.softech.bookmanagement.helpers.DataValidator;
+import com.softech.bookmanagement.helpers.MessageDialogHelper;
+import com.softech.bookmanagement.model.Employee;
+import com.softech.bookmanagement.model.EmployeeDAO;
+import com.softech.bookmanagement.model.Order;
+
 /**
  *
  * @author Nguyen Bae
@@ -28,77 +34,76 @@ public class Form_Invoice extends javax.swing.JPanel {
     private void initComponents() {
 
         panel = new javax.swing.JLayeredPane();
-        txtISBN = new javax.swing.JTextField();
+        txtOrderId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtTitle = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtAuthor = new javax.swing.JTextField();
+        txtUserId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        cbCategory = new javax.swing.JComboBox<>();
+        txtAmount = new javax.swing.JTextField();
         panelBorder1 = new com.softech.bookmanagement.swing.PanelBorder();
         jLabel1 = new javax.swing.JLabel();
         spTable = new javax.swing.JScrollPane();
         tblBook = new com.softech.bookmanagement.swing.Table();
         panel2 = new javax.swing.JLayeredPane();
         jLabel6 = new javax.swing.JLabel();
-        cbPublisher = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         cbPrice = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         cbDescription = new javax.swing.JTextArea();
+        txtQuantity = new javax.swing.JTextField();
         panel3 = new javax.swing.JLayeredPane();
-        jPanel1 = new javax.swing.JPanel();
         btnAdd = new keeptoo.KButton();
         kButton2 = new keeptoo.KButton();
         kButton3 = new keeptoo.KButton();
-        jButton1 = new javax.swing.JButton();
 
-        txtISBN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtISBN.setToolTipText("");
-        txtISBN.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
+        txtOrderId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtOrderId.setToolTipText("");
+        txtOrderId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel3.setText("ISBN");
+        jLabel3.setText("OrderId");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel2.setText("Title");
+        jLabel2.setText("Tatal");
 
-        txtTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTitle.setToolTipText("");
-        txtTitle.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
-        txtTitle.addActionListener(new java.awt.event.ActionListener() {
+        txtTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTotal.setToolTipText("");
+        txtTotal.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
+        txtTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTitleActionPerformed(evt);
+                txtTotalActionPerformed(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel5.setText("Author");
+        jLabel5.setText("UserId");
 
-        txtAuthor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtAuthor.setToolTipText("");
-        txtAuthor.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
+        txtUserId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtUserId.setToolTipText("");
+        txtUserId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel4.setText("Category");
+        jLabel4.setText("Amount");
 
-        cbCategory.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbCategory.setBorder(null);
+        txtAmount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAmount.setToolTipText("");
+        txtAmount.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
 
-        panel.setLayer(txtISBN, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(txtOrderId, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(txtTitle, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(txtTotal, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(txtAuthor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(txtUserId, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(cbCategory, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(txtAmount, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -107,17 +112,17 @@ public class Form_Invoice extends javax.swing.JPanel {
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtAuthor)
-                    .addComponent(txtTitle)
-                    .addComponent(txtISBN)
-                    .addComponent(cbCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtUserId)
+                    .addComponent(txtTotal)
+                    .addComponent(txtOrderId)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4))
-                        .addGap(0, 197, Short.MAX_VALUE)))
+                        .addGap(0, 197, Short.MAX_VALUE))
+                    .addComponent(txtAmount, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
@@ -126,20 +131,20 @@ public class Form_Invoice extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUserId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addGap(9, 9, 9)
-                .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
@@ -154,7 +159,7 @@ public class Form_Invoice extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ISBN", "Title", "Author", "Category", "Publisher", "Price", "Description"
+                "OrderId", "Total", "Amount", "CreateDate", "UserID"
             }
         ));
         spTable.setViewportView(tblBook);
@@ -184,10 +189,7 @@ public class Form_Invoice extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel6.setText("Publisher");
-
-        cbPublisher.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbPublisher.setBorder(null);
+        jLabel6.setText("Quantity");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(63, 43, 150));
@@ -205,12 +207,16 @@ public class Form_Invoice extends javax.swing.JPanel {
         cbDescription.setRows(5);
         jScrollPane1.setViewportView(cbDescription);
 
+        txtQuantity.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtQuantity.setToolTipText("");
+        txtQuantity.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
+
         panel2.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel2.setLayer(cbPublisher, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel2.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel2.setLayer(cbPrice, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel2.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel2.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel2.setLayer(txtQuantity, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
@@ -219,18 +225,16 @@ public class Form_Invoice extends javax.swing.JPanel {
             .addGroup(panel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbPublisher, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbPrice)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                     .addGroup(panel2Layout.createSequentialGroup()
                         .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbPrice)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                            .addGroup(panel2Layout.createSequentialGroup()
-                                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtQuantity, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,7 +242,7 @@ public class Form_Invoice extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -250,19 +254,6 @@ public class Form_Invoice extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 149, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         btnAdd.setText("ADD");
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -271,6 +262,11 @@ public class Form_Invoice extends javax.swing.JPanel {
         btnAdd.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         btnAdd.setkHoverStartColor(new java.awt.Color(168, 192, 255));
         btnAdd.setkStartColor(new java.awt.Color(63, 43, 150));
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         kButton2.setText("UPDATE");
         kButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -288,49 +284,32 @@ public class Form_Invoice extends javax.swing.JPanel {
         kButton3.setkHoverStartColor(new java.awt.Color(168, 192, 255));
         kButton3.setkStartColor(new java.awt.Color(63, 43, 150));
 
-        jButton1.setText("Choose File");
-
-        panel3.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(btnAdd, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(kButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(kButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel3.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
         panel3.setLayout(panel3Layout);
         panel3Layout.setHorizontalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel3Layout.createSequentialGroup()
-                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel3Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(kButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(kButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel3Layout.createSequentialGroup()
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(kButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(kButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel3Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
-                .addGap(34, 34, 34))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(kButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(kButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -364,18 +343,35 @@ public class Form_Invoice extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTitleActionPerformed
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTitleActionPerformed
+    }//GEN-LAST:event_txtTotalActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder();
+        if(sb.length() > 0){
+            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
+            return ;
+        }
+        try{
+            Order emp = new Order();
+            emp.setOrderId(txtOrderId.getText());
+            emp.setDescription(cbDescription.getText());
+            emp.setTotal(txtTotal.getText());
+           
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private keeptoo.KButton btnAdd;
-    private javax.swing.JComboBox<String> cbCategory;
     private javax.swing.JTextArea cbDescription;
     private javax.swing.JTextField cbPrice;
-    private javax.swing.JComboBox<String> cbPublisher;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -384,7 +380,6 @@ public class Form_Invoice extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private keeptoo.KButton kButton2;
     private keeptoo.KButton kButton3;
@@ -394,8 +389,10 @@ public class Form_Invoice extends javax.swing.JPanel {
     private com.softech.bookmanagement.swing.PanelBorder panelBorder1;
     private javax.swing.JScrollPane spTable;
     private com.softech.bookmanagement.swing.Table tblBook;
-    private javax.swing.JTextField txtAuthor;
-    private javax.swing.JTextField txtISBN;
-    private javax.swing.JTextField txtTitle;
+    private javax.swing.JTextField txtAmount;
+    private javax.swing.JTextField txtOrderId;
+    private javax.swing.JTextField txtQuantity;
+    private javax.swing.JTextField txtTotal;
+    private javax.swing.JTextField txtUserId;
     // End of variables declaration//GEN-END:variables
 }

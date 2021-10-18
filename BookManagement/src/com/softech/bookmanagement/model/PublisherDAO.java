@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 public class PublisherDAO {
         public boolean insert(Publisher publish) throws Exception{
         String sql = "INSERT INTO dbo.[Publisher] (PublisherID,PublisherName,Email,Address,Phone,Image)"+
-                "VALUES(?,?,?,?,?,?,?)";           
+                "VALUES(?,?,?,?,?,?)";           
         try(
             Connection  con = DatabaseHelper.connectSQLServer(); 
             PreparedStatement pstmt = con.prepareStatement(sql);
@@ -54,14 +54,14 @@ public class PublisherDAO {
     }
     
     public boolean delete(String publisherId) throws Exception{ 
-        String sql = "delete from Publisher"+
+        String sql = "delete from [Publisher]"+
                 " where PublisherID = ?";           
         try(
             Connection  con = DatabaseHelper.connectSQLServer(); 
             PreparedStatement pstmt = con.prepareStatement(sql);
             ){
+            System.out.println(publisherId + "ldkfgkdfg");
             pstmt.setString(1,publisherId);
-           
             return pstmt.executeUpdate() > 0;
       }
     }
