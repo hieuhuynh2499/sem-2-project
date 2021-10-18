@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,4 +41,34 @@ public class UserDAO {
         }
         return null;
     }
+    public static void UpdateInfo(User u) {
+        try {
+            PreparedStatement ps = DatabaseHelper.connectSQLServer().prepareStatement("UPDATE [User] SET Username=?, Fullname = ?, Phone = ?,"
+                    + "Address = ?, Image= ? where UserID = ?");
+            ps.setString(6, u.getUserid());
+            ps.setString(1, u.getUsername());
+            ps.setString(2, u.getFullname());
+            ps.setString(3, u.getPhone());
+            ps.setString(4, u.getAddress());
+            ps.setString(5, u.getImage());
+            ps.execute();
+            JOptionPane.showMessageDialog(null, "Update Info succesfully", "Message", 1);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "An error occurred. Update Info fail", "Message", 2);
+        }
+    }
+    public static void UpdatePassword(User u) {
+        try {
+            PreparedStatement ps = DatabaseHelper.connectSQLServer().prepareStatement("UPDATE [User] SET Password=? where UserID = ?");
+            ps.setString(2, u.getUserid());
+            ps.setString(1, u.getPassword());
+            ps.execute();
+            JOptionPane.showMessageDialog(null, "Update Password succesfully", "Message", 1);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "An error occurred. Update Passwrd fail", "Message", 2);
+        }
+    }
+    
 }

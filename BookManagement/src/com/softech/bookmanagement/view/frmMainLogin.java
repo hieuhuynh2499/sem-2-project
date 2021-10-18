@@ -265,7 +265,7 @@ public class frmMainLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         if(txtUsername.getText().equals("")){
             lbmsgUsername.setForeground(Color.red);
             lbmsgUsername.setText("Username is empty!");
@@ -300,12 +300,12 @@ StringBuilder sb = new StringBuilder();
             }
             else if (user.getRole().equals("1"))
             {
-                frmAdminManagement admin = new frmAdminManagement();
+                frmAdminManagement admin = new frmAdminManagement(txtUsername.getText());
                 admin.setVisible(true);
                 dispose();
             }else
             {
-                frmEmployeeManagement employee = new frmEmployeeManagement();
+                frmEmployeeManagement employee = new frmEmployeeManagement(txtUsername.getText());
                 employee.setVisible(true);
                 dispose();
             }
@@ -367,6 +367,6 @@ StringBuilder sb = new StringBuilder();
     private javax.swing.JDialog noti;
     private javax.swing.JDialog noti1;
     private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtUsername;
+    public static javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

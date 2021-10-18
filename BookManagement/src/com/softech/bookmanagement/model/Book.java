@@ -10,22 +10,33 @@ package com.softech.bookmanagement.model;
  * @author Nguyen Bae
  */
 public class Book {
-    private String ISBN,Title,Author,PublisherID,CategoryID,Description;
+    private String ISBN,Title,Author,PublisherID,CategoryID,Description,Image;
     private double Price;
     //private boolean status;
 
     public Book() {
     }
-    
-    public Book(String ISBN, String Title, String Author, String PublisherID, double Price, String Description,String CategoryID) {
+
+    public Book(String ISBN, String Title, String Author, String PublisherID, String CategoryID, String Description, String Image, double Price) {
         this.ISBN = ISBN;
         this.Title = Title;
         this.Author = Author;
         this.PublisherID = PublisherID;
-        this.Price = Price;
-        this.Description = Description;
         this.CategoryID = CategoryID;
+        this.Description = Description;
+        this.Image = Image;
+        this.Price = Price;
     }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String Image) {
+        this.Image = Image;
+    }
+    
+    
 
     public String getPublisherID() {
         return PublisherID;
