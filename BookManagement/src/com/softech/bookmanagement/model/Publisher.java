@@ -10,17 +10,26 @@ package com.softech.bookmanagement.model;
  * @author Nguyen Bae
  */
 public class Publisher {
-    private String ID,PushlisherNameString,Email,Address,Phone;
+    private String ID,PushlisherNameString,Email,Address,Phone,Image;
 
     public Publisher() {
     }
 
-    public Publisher(String ID, String PushlisherNameString, String Email, String Address, String Phone) {
+    public Publisher(String ID, String PushlisherNameString, String Email, String Address, String Phone,String Image) {
         this.ID = ID;
         this.PushlisherNameString = PushlisherNameString;
         this.Email = Email;
         this.Address = Address;
         this.Phone = Phone;
+        this.Image = Image;
+    }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String Image) {
+        this.Image = Image;
     }
 
     public String getID() {
