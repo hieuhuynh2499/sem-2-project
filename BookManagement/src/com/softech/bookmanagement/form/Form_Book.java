@@ -607,19 +607,30 @@ public class Form_Book extends javax.swing.JPanel {
         tblModel = (DefaultTableModel) tblBook.getModel();
         int selectedrowindex = tblBook.getSelectedRow();
         txtISBN.setText(tblModel.getValueAt(selectedrowindex, 0).toString());
-        txtTitle.setText(tblModel.getValueAt(selectedrowindex, 1).toString());
-        txtAuthor.setText(tblModel.getValueAt(selectedrowindex, 2).toString());
-        cbCategory.setSelectedItem(tblModel.getValueAt(selectedrowindex, 3).toString());
-        cbPublisher.setSelectedItem(tblModel.getValueAt(selectedrowindex, 4).toString());
-        txtPrice.setText(tblModel.getValueAt(selectedrowindex, 5).toString());
-        txtDescription.setText(tblModel.getValueAt(selectedrowindex, 6).toString());
         try
         {
-            img.setImageLabel(lbImage, "image//" + tblModel.getValueAt(selectedrowindex, 7).toString());
-        }
-        catch (Exception ex)
-        {
-            lbImage.setIcon(null);
+            String sql = "Select * from Book where ISBN = ?";
+            PreparedStatement pstmt1 =  DatabaseHelper.connectSQLServer().prepareStatement(sql);
+            pstmt1.setString(1, txtISBN.getText());
+            ResultSet rs1 = pstmt1.executeQuery();
+            if (rs1.next()) {
+                txtTitle.setText(rs1.getString("Title"));
+                txtAuthor.setText(rs1.getString("Author"));
+                cbCategory.setSelectedItem(tblModel.getValueAt(selectedrowindex, 3).toString());
+                cbPublisher.setSelectedItem(tblModel.getValueAt(selectedrowindex, 4).toString());
+                txtPrice.setText(rs1.getString("Price"));
+                txtDescription.setText(rs1.getString("Description"));
+                if(rs1.getString("Image") != null)
+                {
+                    img.setImageLabel(lbImage, "image//" + rs1.getString("Image"));
+                }
+                else
+                {
+                    lbImage.setIcon(null);
+                }
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_tblBookMouseClicked
 

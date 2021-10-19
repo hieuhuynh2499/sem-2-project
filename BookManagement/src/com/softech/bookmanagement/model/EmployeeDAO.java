@@ -38,20 +38,18 @@ public class EmployeeDAO {
     public boolean update(Employee emp) throws Exception{ 
         System.out.println(emp.getFullName() + "dao");
         String sql = "update [User]"+
-                " SET FullName = ?,Phone = ? ,Address = ?,Username = ?,Password = ?,Status = ?,RoleID = ?"+
+                " SET FullName = ?,Phone = ? ,Address = ?,Username = ?,RoleID = ?"+
                 " where UserID = ?";           
         try(
             Connection  con = DatabaseHelper.connectSQLServer(); 
             PreparedStatement pstmt = con.prepareStatement(sql);
             ){
-            pstmt.setString(8,emp.getUserID());
+            pstmt.setString(6,emp.getUserID());
             pstmt.setString(1,emp.getFullName());
             pstmt.setString(2,emp.getPhone());
             pstmt.setString(3,emp.getAddress());
             pstmt.setString(4,emp.getUsername());
-            pstmt.setString(5,emp.getPassword());
-            pstmt.setInt(6,emp.getStatus());
-            pstmt.setString(7,emp.getRoleID());
+            pstmt.setString(5,emp.getRoleID());
             return pstmt.executeUpdate() > 0;
       }
     }
@@ -69,12 +67,16 @@ public class EmployeeDAO {
       }
     }
     public List<Employee> findAll() throws Exception{ 
+        String Role = "";
         String sql = "select  * from [User]";           
         try(
             Connection  con = DatabaseHelper.connectSQLServer(); 
             PreparedStatement pstmt = con.prepareStatement(sql);
             ){
+            
             try(ResultSet rs = pstmt.executeQuery();){
+                
+                
                 List<Employee> list = new ArrayList<>();
                 while(rs.next()){
                     Employee emp = new Employee();
@@ -83,10 +85,16 @@ public class EmployeeDAO {
                     emp.setPhone(rs.getString("Phone"));
                     emp.setAddress(rs.getString("Address"));
                     emp.setUsername(rs.getString("Username"));
-                    emp.setPassword(rs.getString("Password"));
                     emp.setStatus(rs.getInt("Status"));
                     emp.setImage(rs.getString("Image"));
-                    emp.setRoleID(rs.getString("RoleID"));
+                    String getRole= "Select RoleName from Role where RoleID = ? ";
+                    PreparedStatement psGetRole = DatabaseHelper.connectSQLServer().prepareStatement(getRole);
+                    psGetRole.setString(1, rs.getString("RoleID"));
+                    ResultSet rsGetRole = psGetRole.executeQuery();
+                    while(rsGetRole.next()){
+                        Role = rsGetRole.getString("RoleName");
+                    }
+                    emp.setRoleID(Role);
                     list.add(emp);
                 }
                 return list;

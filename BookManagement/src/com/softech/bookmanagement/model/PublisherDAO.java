@@ -60,7 +60,6 @@ public class PublisherDAO {
             Connection  con = DatabaseHelper.connectSQLServer(); 
             PreparedStatement pstmt = con.prepareStatement(sql);
             ){
-            System.out.println(publisherId + "ldkfgkdfg");
             pstmt.setString(1,publisherId);
             return pstmt.executeUpdate() > 0;
       }
