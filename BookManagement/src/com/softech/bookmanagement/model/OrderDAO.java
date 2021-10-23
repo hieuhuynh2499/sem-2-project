@@ -17,38 +17,18 @@ import java.util.List;
  */
 public class OrderDAO {
     public boolean insert(Order order) throws Exception{
-        String sql = "INSERT INTO dbo.[Order] (OrderID,Description,Total,CreateDate,UserID,Amount)"+
-                "VALUES(?,?,?,?,?,?)";           
+        String sql = "INSERT INTO dbo.[Order] (OrderID,CreateDate,UserID)"+
+                "VALUES(?,?,?)";           
         try(
             Connection  con = DatabaseHelper.connectSQLServer(); 
             PreparedStatement pstmt = con.prepareStatement(sql);
             ){
             pstmt.setString(1,order.getOrderId());
-            pstmt.setString(2,order.getDescription());
-            pstmt.setString(3,order.getTotal());
-            pstmt.setDate(4,order.getCreateDate());
-            pstmt.setString(5,order.getUserID());
-            pstmt.setFloat(6,order.getAmount());
+            pstmt.setDate(2,order.getCreateDate());
+            pstmt.setString(3,order.getUserID());
             return pstmt.executeUpdate() > 0;
       }
     }
-    public boolean update(Order order) throws Exception{ 
-        String sql = "update [Order]"+
-                " SET Description = ?,Total = ? ,CreateDate = ?,Amount = ?"+
-                " where OrderID = ?";           
-        try(
-            Connection  con = DatabaseHelper.connectSQLServer(); 
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            ){
-             pstmt.setString(5,order.getOrderId());
-            pstmt.setString(1,order.getDescription());
-            pstmt.setString(2,order.getTotal());
-            pstmt.setDate(3,order.getCreateDate());
-            pstmt.setFloat(4,order.getAmount());
-            return pstmt.executeUpdate() > 0;
-      }
-    }
-    
     public boolean delete(String empId) throws Exception{ 
         String sql = "delete from [Order]"+
                 " where OrderID = ?";           
@@ -72,11 +52,8 @@ public class OrderDAO {
                 while(rs.next()){
                     Order emp = new Order();
                     emp.setOrderId(rs.getString("OrderID"));
-                    emp.setDescription(rs.getString("Description"));
-                    emp.setTotal(rs.getString("Total"));
                     emp.setCreateDate(rs.getDate("CreateDate"));
                     emp.setUserID(rs.getString("UserID"));
-                    emp.setAmount(rs.getFloat("Amount"));
                     list.add(emp);
                 }
                 return list;

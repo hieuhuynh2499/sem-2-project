@@ -11,20 +11,16 @@ import java.sql.Date;
  * @author This PC
  */
 public class Order {
-    private String OrderId,Description,Total,UserID;
+    private String OrderId,UserID;
     private Date CreateDate;
-    private float Amount;
 
     public Order() {
     }
 
-    public Order(String OrderId, String Description, String Total, String UserID, Date CreateDate, float Amount) {
+    public Order(String OrderId,String UserID, Date CreateDate) {
         this.OrderId = OrderId;
-        this.Description = Description;
-        this.Total = Total;
         this.UserID = UserID;
         this.CreateDate = CreateDate;
-        this.Amount = Amount;
     }
 
     public String getOrderId() {
@@ -33,22 +29,6 @@ public class Order {
 
     public void setOrderId(String OrderId) {
         this.OrderId = OrderId;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String Description) {
-        this.Description = Description;
-    }
-
-    public String getTotal() {
-        return Total;
-    }
-
-    public void setTotal(String Total) {
-        this.Total = Total;
     }
 
     public String getUserID() {
@@ -65,16 +45,5 @@ public class Order {
 
     public void setCreateDate(Date CreateDate) {
         this.CreateDate = CreateDate;
-    }
-
-    public float getAmount() {
-        return Amount;
-    }
-
-    public void setAmount(float Amount) {
-        this.Amount = Amount;
-    }
-    
-    
-    
+    }  
 }

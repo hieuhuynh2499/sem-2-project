@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class OrderDetailDAO {
     public boolean insert(OrderDetail order) throws Exception{
-        String sql = "INSERT INTO dbo.[OrderDetail] (OrderDetailID,Quantity,Price,OrderID,BookID)"+
-                "VALUES(?,?,?,?,?)";           
+        String sql = "INSERT INTO dbo.[OrderDetail] (OrderDetailID,Quantity,Price,OrderID,BookID,Total,Description,Amount)"+
+                "VALUES(?,?,?,?,?,?,?,?)";           
         try(
             Connection  con = DatabaseHelper.connectSQLServer(); 
             PreparedStatement pstmt = con.prepareStatement(sql);
@@ -28,12 +28,15 @@ public class OrderDetailDAO {
             pstmt.setFloat(3,order.getPrice());
             pstmt.setString(4,order.getOrderID());
             pstmt.setString(5,order.getBookID());
+            pstmt.setString(6,order.getTotal());
+            pstmt.setString(7,order.getDescription());
+            pstmt.setFloat(8,order.getAmount());
             return pstmt.executeUpdate() > 0;
       }
     }
 
     public boolean delete(String empId) throws Exception{ 
-        String sql = "delete from [Order]"+
+        String sql = "delete from [OrderDetail]"+
                 " where OrderDetailID = ?";           
         try(
             Connection  con = DatabaseHelper.connectSQLServer(); 
