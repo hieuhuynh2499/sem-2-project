@@ -471,6 +471,7 @@ public class Form_Employee extends javax.swing.JPanel {
             MessageDialogHelper.showErrorDialog(null,e.getMessage(),"error" );
         }
         loadTable();
+        setFieldEmpty();
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -521,6 +522,7 @@ public class Form_Employee extends javax.swing.JPanel {
             MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
         }
         loadTable();
+        setFieldEmpty();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -550,6 +552,7 @@ public class Form_Employee extends javax.swing.JPanel {
             MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
         }
         loadTable();
+        setFieldEmpty();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void tblEmplyeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmplyeeMouseClicked

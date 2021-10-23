@@ -28,7 +28,7 @@ public class EmployeeDAO {
             pstmt.setString(3,emp.getPhone());
             pstmt.setString(4,emp.getAddress());
             pstmt.setString(5,emp.getUsername());
-            pstmt.setString(6,emp.getPassword());
+            pstmt.setString(6,"123123");
             pstmt.setInt(7,emp.getStatus());
             pstmt.setString(8,emp.getImage());
             pstmt.setString(9,emp.getRoleID());
