@@ -6,6 +6,7 @@
 package com.softech.bookmanagement.form;
 
 import com.softech.bookmanagement.helpers.DataValidator;
+import com.softech.bookmanagement.helpers.DatabaseHelper;
 import com.softech.bookmanagement.helpers.MessageDialogHelper;
 import com.softech.bookmanagement.model.Employee;
 import com.softech.bookmanagement.model.EmployeeDAO;
@@ -13,16 +14,20 @@ import com.softech.bookmanagement.model.Order;
 import com.softech.bookmanagement.model.OrderDAO;
 import com.softech.bookmanagement.model.OrderDetail;
 import com.softech.bookmanagement.model.OrderDetailDAO;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author Nguyen Bae
  */
 public class Form_Invoice extends javax.swing.JPanel {
-     DefaultTableModel tblModel;
+    DefaultTableModel tblModel;
     /**
      * Creates new form Form_Invoice
      */
@@ -479,12 +484,43 @@ public class Form_Invoice extends javax.swing.JPanel {
         loadTable();
         setFieldEmpty();
     }//GEN-LAST:event_kButton3ActionPerformed
-
+    Form_OrderDetail orderdetail = new Form_OrderDetail();
     private void tblBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBookMouseClicked
         // TODO add your handling code here:
-        System.out.println("test thu ");
-        Order_Detail order = new Order_Detail();
-        order.
+        int index = tblBook.getSelectedRow();
+        TableModel model = tblBook.getModel();
+
+        orderdetail.setVisible(true);
+        orderdetail.pack();
+        orderdetail.setLocationRelativeTo(null);
+        orderdetail.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+         try
+        {
+            String sql = "Select * from [OrderDetail] where OrderDetailID = ?";
+            String sql1 = "Select * from [Order] where OrderID = ?";
+            PreparedStatement pstmt1 =  DatabaseHelper.connectSQLServer().prepareStatement(sql);
+            pstmt1.setString(1, model.getValueAt(index,0).toString());
+            ResultSet rs1 = pstmt1.executeQuery();
+            
+            PreparedStatement pstmt2 =  DatabaseHelper.connectSQLServer().prepareStatement(sql1);
+            pstmt2.setString(1, model.getValueAt(index,0).toString());
+            ResultSet rs2 = pstmt2.executeQuery();
+            if (rs1.next() && rs2.next()) {
+                orderdetail.txtOrderDetailId.setText(rs1.getString("OrderDetailID"));
+                orderdetail.txtOrderId.setText(rs1.getString("OrderDetailID"));
+                orderdetail.txtCreateDate.setText(rs2.getString("CreateDate"));
+                orderdetail.txtUserId.setText(rs2.getString("UserID"));
+                orderdetail.txtQuantity.setText(rs1.getString("Quantity"));
+                orderdetail.txtPrice.setText(rs1.getString("Price"));
+                orderdetail.txtDescription.setText(rs1.getString("Description"));
+                orderdetail.txtAmount.setText(rs1.getString("Amount"));
+                orderdetail.txtTotal.setText(rs1.getString("Total"));
+                orderdetail.txtBookId.setText(rs1.getString("BookID"));  
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_tblBookMouseClicked
 
 

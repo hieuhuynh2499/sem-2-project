@@ -34,7 +34,24 @@ public class OrderDetailDAO {
             return pstmt.executeUpdate() > 0;
       }
     }
+    public boolean update(OrderDetail order) throws Exception{
 
+        String sql = "update [OrderDetail]"+
+                " SET Quantity = ?,Price = ?, Description=?,Total = ?,Amount = ?"+
+                " where OrderID = ?"; 
+        try(
+            Connection  con = DatabaseHelper.connectSQLServer(); 
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ){
+            pstmt.setFloat(1,order.getQuantity());
+            pstmt.setFloat(2,order.getPrice());
+            pstmt.setString(3,order.getDescription());
+            pstmt.setString(4,order.getTotal());
+            pstmt.setFloat(5,order.getAmount());
+            pstmt.setString(6,order.getOrderID());
+            return pstmt.executeUpdate() > 0;
+      }
+    }
     public boolean delete(String empId) throws Exception{ 
         String sql = "delete from [OrderDetail]"+
                 " where OrderDetailID = ?";           

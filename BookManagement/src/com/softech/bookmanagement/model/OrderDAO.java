@@ -29,6 +29,21 @@ public class OrderDAO {
             return pstmt.executeUpdate() > 0;
       }
     }
+    public boolean update(Order order) throws Exception{
+
+        String sql = "update [Order]"+
+                " SET CreateDate = ?,UserID = ?"+
+                " where OrderID = ?"; 
+        try(
+            Connection  con = DatabaseHelper.connectSQLServer(); 
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ){
+            pstmt.setDate(1,order.getCreateDate());
+            pstmt.setString(2,order.getUserID());
+            pstmt.setString(3,order.getOrderId());
+            return pstmt.executeUpdate() > 0;
+      }
+    }
     public boolean delete(String empId) throws Exception{ 
         String sql = "delete from [Order]"+
                 " where OrderID = ?";           
