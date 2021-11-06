@@ -9,19 +9,17 @@ package com.softech.bookmanagement.model;
  * @author This PC
  */
 public class OrderDetail {
-    private String OrderDetailID,OrderID,BookID,Total,Description;
+    private String OrderDetailID,OrderID,BookID,NameBook;
     private int Quantity;
-    private float  Price,Amount;
+    private float Price;
 
-    public OrderDetail(String OrderDetailID, String OrderID, String BookID, String Total, String Description, int Quantity, float Price, float Amount) {
+    public OrderDetail(String OrderDetailID, String OrderID, String BookID, String NameBook, int Quantity, float Price) {
         this.OrderDetailID = OrderDetailID;
         this.OrderID = OrderID;
         this.BookID = BookID;
-        this.Total = Total;
-        this.Description = Description;
+        this.NameBook = NameBook;
         this.Quantity = Quantity;
         this.Price = Price;
-        this.Amount = Amount;
     }
 
     public OrderDetail() {
@@ -51,20 +49,12 @@ public class OrderDetail {
         this.BookID = BookID;
     }
 
-    public String getTotal() {
-        return Total;
+    public String getNameBook() {
+        return NameBook;
     }
 
-    public void setTotal(String Total) {
-        this.Total = Total;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String Description) {
-        this.Description = Description;
+    public void setNameBook(String NameBook) {
+        this.NameBook = NameBook;
     }
 
     public int getQuantity() {
@@ -83,13 +73,8 @@ public class OrderDetail {
         this.Price = Price;
     }
 
-    public float getAmount() {
-        return Amount;
-    }
+    
 
-    public void setAmount(float Amount) {
-        this.Amount = Amount;
-    }
 
     
     

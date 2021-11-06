@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -29,6 +30,7 @@ public class Form_Employee extends javax.swing.JPanel {
     DefaultTableModel tblModel;
     SetImage img = new SetImage();
     String imgFile ="";
+    private JFrame mainFrame;
     public Form_Employee() {
         initComponents();
         initTable();
@@ -533,14 +535,14 @@ public class Form_Employee extends javax.swing.JPanel {
             System.out.println(emp.getFullName());
             EmployeeDAO empDAO = new EmployeeDAO();
             if(empDAO.insert(emp)){
-                MessageDialogHelper.showMessageDialog(null,"Employee is saved in database","notification" );
+                MessageDialogHelper.showMessageDialog(mainFrame,"Employee is saved in database","notification" );
             }else{
-                MessageDialogHelper.showConfirmDialog(null,"Employee is save failed" , "notification");
+                MessageDialogHelper.showConfirmDialog(mainFrame,"Employee is save failed" , "notification");
             }
             
         }catch(Exception e){
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(),"error" );
+            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(),"error" );
         }
         loadTable();
         setFieldEmpty();
@@ -555,11 +557,11 @@ public class Form_Employee extends javax.swing.JPanel {
         DataValidator.validateEmpty(txtAddress, sb," EmployeeFullname is not empty");
         DataValidator.validateEmpty(txtUsername, sb," EmployeeFullname is not empty");
         if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(null,sb.toString() ,"ERROR");
+            MessageDialogHelper.showErrorDialog(mainFrame,sb.toString() ,"ERROR");
             return ;
         }
         
-        if(MessageDialogHelper.showConfirmDialog(null,"are you sure?","Question") == JOptionPane.NO_OPTION){
+        if(MessageDialogHelper.showConfirmDialog(mainFrame,"are you sure?","Question") == JOptionPane.NO_OPTION){
             return;
         }
         
@@ -583,15 +585,15 @@ public class Form_Employee extends javax.swing.JPanel {
             emp.setRoleID(RoleID);
             EmployeeDAO empDAO = new EmployeeDAO();
             if(empDAO.update(emp)){
-                MessageDialogHelper.showMessageDialog(null,"Employee is update success", "notification");
+                MessageDialogHelper.showMessageDialog(mainFrame,"Employee is update success", "notification");
             }else{
-                MessageDialogHelper.showConfirmDialog(null, "Employee is update failed", "notification");
+                MessageDialogHelper.showConfirmDialog(mainFrame, "Employee is update failed", "notification");
             }
             setFieldEmpty();
             
         }catch(Exception e){
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
         }
         loadTable();
         setFieldEmpty();
@@ -602,26 +604,26 @@ public class Form_Employee extends javax.swing.JPanel {
         
         StringBuilder sb = new StringBuilder();
         if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
+            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(),"ERROR");
             return ;
         }
         
-        if(MessageDialogHelper.showConfirmDialog(null,"are you sure","question") == JOptionPane.NO_OPTION){
+        if(MessageDialogHelper.showConfirmDialog(mainFrame,"are you sure","question") == JOptionPane.NO_OPTION){
             return;
         }
         
         try{
             EmployeeDAO empDAO = new EmployeeDAO();
             if(empDAO.delete(txtId.getText())){
-                MessageDialogHelper.showMessageDialog(null,"Employee is delete success", "notification");
+                MessageDialogHelper.showMessageDialog(mainFrame,"Employee is delete success", "notification");
             }else{
-                MessageDialogHelper.showConfirmDialog(null, "Employee is delete failed", "notification");
+                MessageDialogHelper.showConfirmDialog(mainFrame, "Employee is delete failed", "notification");
             }
              setFieldEmpty();
             
         }catch(Exception e){
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
         }
         loadTable();
         setFieldEmpty();

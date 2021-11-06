@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -30,7 +31,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
     private DefaultTableModel tblModel;
     SetImage img = new SetImage();
     String imgFile ="";
-    
+    private JFrame mainFrame;
     public Form_CatAndPub() {
         initComponents();
         initTableCate ();
@@ -631,7 +632,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         if (action == JFileChooser.APPROVE_OPTION) {
             while (true) {
                 if (!fileChooser.getSelectedFile().getName().matches("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")) {
-                    JOptionPane.showMessageDialog(null, "Định dạng file hình đuôi phải là GIF, JPG, PNG !");
+                    JOptionPane.showMessageDialog(mainFrame, "Định dạng file hình đuôi phải là GIF, JPG, PNG !");
                     return;
                 } else {
                     break;
@@ -654,7 +655,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
          DataValidator.validateEmpty(txtPublisherAddress, sb," PublisherAddress is not empty");
          DataValidator.validateEmpty(txtPublisherPhone, sb," PublisherPhone is not empty");
         if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
+            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(),"ERROR");
             return ;
         }
         try{
@@ -669,7 +670,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
             puclisherDAO.insert(publisher);
         }catch(Exception e){
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
         }
         initTablePub();
         loadTablePub();
@@ -699,7 +700,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
             puclisherDAO.update(publisher);
         }catch(Exception e){
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
         }
         initTablePub();
         loadTablePub();
@@ -720,13 +721,13 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         try{
             PublisherDAO publisherDAO = new PublisherDAO();
             if(publisherDAO.delete(txtPublisherId.getText())){
-                MessageDialogHelper.showMessageDialog(null,"Publisher is delete success", "notification");
+                MessageDialogHelper.showMessageDialog(mainFrame,"Publisher is delete success", "notification");
             }else{
-                MessageDialogHelper.showConfirmDialog(null, "Publisher is delete failed", "notification");
+                MessageDialogHelper.showConfirmDialog(mainFrame, "Publisher is delete failed", "notification");
             } 
         }catch(Exception e){
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
         }
         initTablePub();
         loadTablePub();
@@ -739,7 +740,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         DataValidator.validateEmpty(txtCategoryName, sb," CategoryName is not empty");
   
         if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
+            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(),"ERROR");
             return ;
         }
         try{
@@ -748,14 +749,14 @@ public class Form_CatAndPub extends javax.swing.JPanel {
            cate.setCategoryName(txtCategoryName.getText());
             CategoryDAO cateDAO = new CategoryDAO();
             if(cateDAO.insert(cate)){
-                MessageDialogHelper.showMessageDialog(null,"Category is saved in database", "notification");
+                MessageDialogHelper.showMessageDialog(mainFrame,"Category is saved in database", "notification");
             }else{
-                MessageDialogHelper.showConfirmDialog(null, "Category is save failed", "notification");
+                MessageDialogHelper.showConfirmDialog(mainFrame, "Category is save failed", "notification");
             }
             
         }catch(Exception e){
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
         }
         initTableCate();
         loadTableCate();
@@ -768,7 +769,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         DataValidator.validateEmpty(txtCategoryName, sb," CategoryName is not empty");
   
         if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
+            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(),"ERROR");
             return ;
         }
         try{
@@ -777,14 +778,14 @@ public class Form_CatAndPub extends javax.swing.JPanel {
            cate.setCategoryName(txtCategoryName.getText());
             CategoryDAO cateDAO = new CategoryDAO();
             if(cateDAO.update(cate)){
-                MessageDialogHelper.showMessageDialog(null,"Category is saved in database", "notification");
+                MessageDialogHelper.showMessageDialog(mainFrame,"Category is saved in database", "notification");
             }else{
-                MessageDialogHelper.showConfirmDialog(null, "Category is save failed", "notification");
+                MessageDialogHelper.showConfirmDialog(mainFrame, "Category is save failed", "notification");
             }
             
         }catch(Exception e){
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
         }
         initTableCate();
         loadTableCate();
@@ -794,24 +795,24 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         // TODO add your handling code here:
          StringBuilder sb = new StringBuilder();
         if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
+            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(),"ERROR");
             return ;
         }
         
-        if(MessageDialogHelper.showConfirmDialog(null,"are you sure","question") == JOptionPane.NO_OPTION){
+        if(MessageDialogHelper.showConfirmDialog(mainFrame,"are you sure","question") == JOptionPane.NO_OPTION){
             return;
         }
         
         try{
             CategoryDAO cateDAO = new CategoryDAO();
             if(cateDAO.delete(txtCategoryId.getText())){
-                MessageDialogHelper.showMessageDialog(null,"Employee is delete success", "notification");
+                MessageDialogHelper.showMessageDialog(mainFrame,"Employee is delete success", "notification");
             }else{
-                MessageDialogHelper.showConfirmDialog(null, "Employee is delete failed", "notification");
+                MessageDialogHelper.showConfirmDialog(mainFrame, "Employee is delete failed", "notification");
             } 
         }catch(Exception e){
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
         }
         initTableCate();
         loadTableCate();

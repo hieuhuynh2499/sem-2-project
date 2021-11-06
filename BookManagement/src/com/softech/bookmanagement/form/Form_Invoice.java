@@ -8,14 +8,18 @@ package com.softech.bookmanagement.form;
 import com.softech.bookmanagement.helpers.DataValidator;
 import com.softech.bookmanagement.helpers.DatabaseHelper;
 import com.softech.bookmanagement.helpers.MessageDialogHelper;
+import com.softech.bookmanagement.model.Book;
+import com.softech.bookmanagement.model.BookDAO;
 import com.softech.bookmanagement.model.Employee;
 import com.softech.bookmanagement.model.EmployeeDAO;
+import com.softech.bookmanagement.model.InvoiceDTO;
 import com.softech.bookmanagement.model.Order;
 import com.softech.bookmanagement.model.OrderDAO;
 import com.softech.bookmanagement.model.OrderDetail;
 import com.softech.bookmanagement.model.OrderDetailDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -27,13 +31,17 @@ import javax.swing.table.TableModel;
  * @author Nguyen Bae
  */
 public class Form_Invoice extends javax.swing.JPanel {
-    DefaultTableModel tblModel;
+    DefaultTableModel tblModel,tblModel2;
+     private JFrame mainFrame;
     /**
      * Creates new form Form_Invoice
      */
+    ArrayList<InvoiceDTO> listInvoice = new ArrayList<InvoiceDTO>(); 
     public Form_Invoice() {
         initComponents();
         initTable();
+        loadNameEmployees();
+        loadNameBooks();
         loadTable();
     }
 
@@ -63,6 +71,36 @@ public class Form_Invoice extends javax.swing.JPanel {
             MessageDialogHelper.showErrorDialog(null, e.getMessage(), "error");
         }
     }
+    private void loadNameEmployees(){
+        String sql = "Select FullName from [User]";
+        cbEmployees.removeAllItems();
+        try{
+        PreparedStatement pstmt = DatabaseHelper.connectSQLServer().prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+        cbEmployees.removeAllItems();
+            while (rs.next()) {
+                cbEmployees.addItem(rs.getString("FullName")); 
+            }
+            rs.close();
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+     private void loadNameBooks(){
+       String sql = "Select [Title] from [Book]";
+        cbBook.removeAllItems();
+        try{
+        PreparedStatement pstmt = DatabaseHelper.connectSQLServer().prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+        cbBook.removeAllItems();
+            while (rs.next()) {
+                cbBook.addItem(rs.getString("Title")); 
+            }
+            rs.close();
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -70,29 +108,23 @@ public class Form_Invoice extends javax.swing.JPanel {
         panel = new javax.swing.JLayeredPane();
         txtOrderId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtTotal = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtUserId = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtAmount = new javax.swing.JTextField();
+        cbBook = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        cbEmployees = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        txtQuantity = new javax.swing.JTextField();
         panelBorder1 = new com.softech.bookmanagement.swing.PanelBorder();
         jLabel1 = new javax.swing.JLabel();
-        spTable = new javax.swing.JScrollPane();
+        spTable1 = new javax.swing.JScrollPane();
         tblBook = new com.softech.bookmanagement.swing.Table();
         panel2 = new javax.swing.JLayeredPane();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtPrice = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        cbDescription = new javax.swing.JTextArea();
-        txtQuantity = new javax.swing.JTextField();
+        btnAddbook = new javax.swing.JButton();
         panel3 = new javax.swing.JLayeredPane();
-        btnAdd = new keeptoo.KButton();
-        kButton3 = new keeptoo.KButton();
-        txtBookId = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
+        spTable = new javax.swing.JScrollPane();
+        tblBook12 = new com.softech.bookmanagement.swing.Table();
+        btnCreateOrder = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(242, 242, 242));
         setPreferredSize(new java.awt.Dimension(919, 620));
@@ -104,48 +136,37 @@ public class Form_Invoice extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel3.setText("OrderId");
+        jLabel3.setText("Employees");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel2.setText("Total");
+        cbBook.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        txtTotal.setBackground(new java.awt.Color(242, 242, 242));
-        txtTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTotal.setToolTipText("");
-        txtTotal.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
-        txtTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTotalActionPerformed(evt);
-            }
-        });
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(63, 43, 150));
+        jLabel10.setText("OrderId");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel5.setText("UserId");
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(63, 43, 150));
+        jLabel11.setText("Book");
 
-        txtUserId.setBackground(new java.awt.Color(242, 242, 242));
-        txtUserId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtUserId.setToolTipText("");
-        txtUserId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
+        cbEmployees.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel4.setText("Amount");
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(63, 43, 150));
+        jLabel12.setText("Quantity");
 
-        txtAmount.setBackground(new java.awt.Color(242, 242, 242));
-        txtAmount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtAmount.setToolTipText("");
-        txtAmount.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
+        txtQuantity.setBackground(new java.awt.Color(242, 242, 242));
+        txtQuantity.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtQuantity.setToolTipText("");
+        txtQuantity.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
 
         panel.setLayer(txtOrderId, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(txtTotal, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(txtUserId, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(txtAmount, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(cbBook, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(cbEmployees, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(txtQuantity, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -154,38 +175,38 @@ public class Form_Invoice extends javax.swing.JPanel {
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUserId)
-                    .addComponent(txtTotal)
                     .addComponent(txtOrderId)
+                    .addComponent(cbBook, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbEmployees, javax.swing.GroupLayout.Alignment.TRAILING, 0, 254, Short.MAX_VALUE)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
-                        .addGap(0, 197, Short.MAX_VALUE))
-                    .addComponent(txtAmount, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtQuantity, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbBook, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUserId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -209,7 +230,7 @@ public class Form_Invoice extends javax.swing.JPanel {
                 tblBookMouseClicked(evt);
             }
         });
-        spTable.setViewportView(tblBook);
+        spTable1.setViewportView(tblBook);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -217,53 +238,38 @@ public class Form_Invoice extends javax.swing.JPanel {
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 894, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel1)
+                .addContainerGap(684, Short.MAX_VALUE))
+            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelBorder1Layout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(spTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 846, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(264, Short.MAX_VALUE))
+            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelBorder1Layout.createSequentialGroup()
+                    .addGap(34, 34, 34)
+                    .addComponent(spTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                    .addGap(20, 20, 20)))
         );
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel6.setText("Quantity");
+        btnAddbook.setBackground(new java.awt.Color(63, 43, 150));
+        btnAddbook.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAddbook.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddbook.setText("   ADD");
+        btnAddbook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddbookActionPerformed(evt);
+            }
+        });
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel7.setText("Price");
-
-        txtPrice.setBackground(new java.awt.Color(242, 242, 242));
-        txtPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtPrice.setToolTipText("");
-        txtPrice.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel8.setText("Desciption");
-
-        cbDescription.setColumns(20);
-        cbDescription.setRows(5);
-        jScrollPane1.setViewportView(cbDescription);
-
-        txtQuantity.setBackground(new java.awt.Color(242, 242, 242));
-        txtQuantity.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtQuantity.setToolTipText("");
-        txtQuantity.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
-
-        panel2.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel2.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel2.setLayer(txtPrice, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel2.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel2.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel2.setLayer(txtQuantity, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel2.setLayer(btnAddbook, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
@@ -271,111 +277,81 @@ public class Form_Invoice extends javax.swing.JPanel {
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPrice)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtQuantity, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                .addComponent(btnAddbook, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAddbook, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnAdd.setText("ADD");
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnAdd.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnAdd.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnAdd.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnAdd.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnAdd.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnAdd.setkStartColor(new java.awt.Color(63, 43, 150));
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        tblBook12.setBackground(new java.awt.Color(242, 242, 242));
+        tblBook12.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "OrderId", "CreateDate", "UserID"
+            }
+        ));
+        spTable.setViewportView(tblBook12);
+
+        btnCreateOrder.setBackground(new java.awt.Color(63, 43, 150));
+        btnCreateOrder.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCreateOrder.setForeground(new java.awt.Color(255, 255, 255));
+        btnCreateOrder.setText("Create");
+        btnCreateOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnCreateOrderActionPerformed(evt);
             }
         });
 
-        kButton3.setText("DELETE");
-        kButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        kButton3.setkEndColor(new java.awt.Color(168, 192, 255));
-        kButton3.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        kButton3.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        kButton3.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        kButton3.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        kButton3.setkStartColor(new java.awt.Color(63, 43, 150));
-        kButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setBackground(new java.awt.Color(63, 43, 150));
+        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setText("delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kButton3ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
-        txtBookId.setBackground(new java.awt.Color(242, 242, 242));
-        txtBookId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtBookId.setToolTipText("");
-        txtBookId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel9.setText("BookId");
-
-        panel3.setLayer(btnAdd, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel3.setLayer(kButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel3.setLayer(txtBookId, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel3.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel3.setLayer(spTable, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel3.setLayer(btnCreateOrder, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel3.setLayer(btnDelete, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
         panel3.setLayout(panel3Layout);
         panel3Layout.setHorizontalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel3Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtBookId, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel3Layout.createSequentialGroup()
-                                .addGap(0, 4, Short.MAX_VALUE)
-                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(kButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(76, 76, 76))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCreateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
+            .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                    .addContainerGap(19, Short.MAX_VALUE)
+                    .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(169, Short.MAX_VALUE)))
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBookId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnCreateOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(167, Short.MAX_VALUE))
+            .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -385,121 +361,97 @@ public class Form_Invoice extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panel3)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(panel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panel2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
     }// </editor-fold>//GEN-END:initComponents
-   
-    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalActionPerformed
-    private void setFieldEmpty(){
+       private void setFieldEmpty(){
         txtOrderId.setText("");
-        txtUserId.setText("");
-        txtQuantity.setText("");
-        txtPrice.setText("");
-        txtTotal.setText("");    
-         txtAmount.setText("");   
-          cbDescription.setText("");   
-           txtBookId.setText("");   
-    }
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        
+    }    Form_OrderDetail orderdetail = new Form_OrderDetail();
+    private void btnCreateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateOrderActionPerformed
         // TODO add your handling code here:
         StringBuilder sb = new StringBuilder();
+        String idUser = "1";
         if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
+            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(),"ERROR");
             return ;
         }
         try{
+            EmployeeDAO empDao = new EmployeeDAO();
+            BookDAO bookdao = new BookDAO();
+            OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+            List<Employee> listuser = empDao.findAll();
+            for(Employee employee:listuser){
+                if(employee.getFullName().equals(cbEmployees.getSelectedItem().toString())){
+                    idUser = employee.getUserID();
+                }
+            }
+            
             Order order = new Order();
             long millis = System.currentTimeMillis();
             java.sql.Date date = new java.sql.Date(millis);
             order.setOrderId(txtOrderId.getText());
             order.setCreateDate(date);
-            order.setUserID(txtUserId.getText());
+            order.setNameUser(cbEmployees.getSelectedItem().toString());
+            order.setUserID(idUser);
+            OrderDAO orderDao = new OrderDAO();
             
-            OrderDetail orderdetail = new OrderDetail();
-            orderdetail.setOrderDetailID(txtOrderId.getText());
-            orderdetail.setQuantity(Integer.parseInt(txtQuantity.getText()));
-            orderdetail.setPrice(Integer.parseInt(txtPrice.getText()));
-            orderdetail.setTotal(txtTotal.getText());
-            orderdetail.setAmount(Integer.parseInt(txtAmount.getText()));
-            orderdetail.setDescription(cbDescription.getText());
-            orderdetail.setOrderID(txtOrderId.getText());
-            orderdetail.setBookID(txtBookId.getText());
             
-            OrderDAO orderDAO = new OrderDAO();
-            OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
-            
-            if(orderDAO.insert(order) && orderDetailDAO.insert(orderdetail)){
-                setFieldEmpty();
-                loadTable();
-                MessageDialogHelper.showMessageDialog(null,"order is saved in database","notification" );
+            orderDao.findAll();
+            if(orderDao.insert(order)){
+                
+                for(InvoiceDTO invoice:listInvoice){
+                    Book book = bookdao.findBookByName(invoice.getNameBook());
+                    OrderDetail orderdetail = new OrderDetail();
+                    orderdetail.setOrderID(txtOrderId.getText());
+                    orderdetail.setBookID(book.getISBN());
+                    orderdetail.setPrice((float)book.getPrice());
+                    orderdetail.setNameBook(book.getTitle());
+                    orderdetail.setQuantity(Integer.parseInt(invoice.getQuantity()));
+                    orderDetailDAO.insert(orderdetail);
+     
+                }
+                
+                
+                
+                MessageDialogHelper.showMessageDialog(mainFrame,"order is saved in database", "notification");
             }else{
-                MessageDialogHelper.showConfirmDialog(null,"order is save failed" , "notification");
+                MessageDialogHelper.showConfirmDialog(mainFrame, "order is save failed", "notification");
             }
-            
-           
             
         }catch(Exception e){
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
         }
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnCreateOrderActionPerformed
 
-    private void kButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton3ActionPerformed
-        // TODO add your handling code here:
-        StringBuilder sb = new StringBuilder();
-        if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
-            return ;
-        }
-        
-        if(MessageDialogHelper.showConfirmDialog(null,"are you sure","question") == JOptionPane.NO_OPTION){
-            return;
-        }
-        
-        try{
-            OrderDAO empDAO = new OrderDAO();
-            if(empDAO.delete(txtOrderId.getText())){
-                MessageDialogHelper.showMessageDialog(null,"Order is delete success", "notification");
-            }else{
-                MessageDialogHelper.showConfirmDialog(null, "Order is delete failed", "notification");
-            }
-             setFieldEmpty();
-            
-        }catch(Exception e){
-            e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
-        }
-        loadTable();
-        setFieldEmpty();
-    }//GEN-LAST:event_kButton3ActionPerformed
-    Form_OrderDetail orderdetail = new Form_OrderDetail();
     private void tblBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBookMouseClicked
         // TODO add your handling code here:
         int index = tblBook.getSelectedRow();
         TableModel model = tblBook.getModel();
-
+        float PriceTotal = 0;
         orderdetail.setVisible(true);
         orderdetail.pack();
         orderdetail.setLocationRelativeTo(null);
@@ -507,59 +459,87 @@ public class Form_Invoice extends javax.swing.JPanel {
         
          try
         {
-            String sql = "Select * from [OrderDetail] where OrderDetailID = ?";
+            String sql = "select * from OrderDetail where OrderID = ?";
             String sql1 = "Select * from [Order] where OrderID = ?";
             PreparedStatement pstmt1 =  DatabaseHelper.connectSQLServer().prepareStatement(sql);
             pstmt1.setString(1, model.getValueAt(index,0).toString());
             ResultSet rs1 = pstmt1.executeQuery();
-            
+            OrderDetailDAO orderdetail1 = new OrderDetailDAO();
+            List<OrderDetail> listorderdetail = orderdetail1.findAll("5");
+            for(OrderDetail employee:listorderdetail){
+               PriceTotal += employee.getPrice() * employee.getQuantity();
+            }
             PreparedStatement pstmt2 =  DatabaseHelper.connectSQLServer().prepareStatement(sql1);
             pstmt2.setString(1, model.getValueAt(index,0).toString());
             ResultSet rs2 = pstmt2.executeQuery();
             if (rs1.next() && rs2.next()) {
-                orderdetail.txtOrderDetailId.setText(rs1.getString("OrderDetailID"));
-                orderdetail.txtOrderId.setText(rs1.getString("OrderDetailID"));
-                orderdetail.txtCreateDate.setText(rs2.getString("CreateDate"));
-                orderdetail.txtUserId.setText(rs2.getString("UserID"));
-                orderdetail.txtQuantity.setText(rs1.getString("Quantity"));
-                orderdetail.txtPrice.setText(rs1.getString("Price"));
-                orderdetail.txtDescription.setText(rs1.getString("Description"));
-                orderdetail.txtAmount.setText(rs1.getString("Amount"));
-                orderdetail.txtTotal.setText(rs1.getString("Total"));
-                orderdetail.txtBookId.setText(rs1.getString("BookID"));  
+                System.out.println(rs2.getString("NameUser"));
+                orderdetail.txtOrderDetailId.setText(rs1.getString("OrderID"));
+                orderdetail.txtName.setText(rs2.getString("NameUser"));
+                orderdetail.txtTotal.setText(String.valueOf(PriceTotal));
+                orderdetail.test = 123;
+                System.out.println(orderdetail.test + "sau khi test");
             }
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_tblBookMouseClicked
 
+    private void btnAddbookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddbookActionPerformed
+        // TODO add your handling code here:
+        
+        InvoiceDTO invoice = new InvoiceDTO(
+        txtOrderId.getText(), txtQuantity.getText(),
+        cbBook.getSelectedItem().toString(),
+        cbEmployees.getSelectedItem().toString());
+        listInvoice.add(invoice);
+        loadTableBook();
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnAddbookActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
+    private void loadTableBook(){
+        tblModel2 = (DefaultTableModel)tblBook12.getModel();
+        try{
+            tblModel2.setRowCount(0);
+            for(InvoiceDTO em:listInvoice){
+                tblModel2.addRow(new Object[]{
+                    em.getNameBook(),em.getQuantity()
+                });
+            }
+            tblModel2.fireTableDataChanged();
+        }catch(Exception e){
+            e.printStackTrace();
+            MessageDialogHelper.showErrorDialog(mainFrame, e.getMessage(), "error");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private keeptoo.KButton btnAdd;
-    private javax.swing.JTextArea cbDescription;
+    private javax.swing.JButton btnAddbook;
+    private javax.swing.JButton btnCreateOrder;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JComboBox<String> cbBook;
+    private javax.swing.JComboBox<String> cbEmployees;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private keeptoo.KButton kButton3;
     private javax.swing.JLayeredPane panel;
     private javax.swing.JLayeredPane panel2;
     private javax.swing.JLayeredPane panel3;
     private com.softech.bookmanagement.swing.PanelBorder panelBorder1;
     private javax.swing.JScrollPane spTable;
+    private javax.swing.JScrollPane spTable1;
     private com.softech.bookmanagement.swing.Table tblBook;
-    private javax.swing.JTextField txtAmount;
-    private javax.swing.JTextField txtBookId;
+    private com.softech.bookmanagement.swing.Table tblBook12;
     private javax.swing.JTextField txtOrderId;
-    private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtQuantity;
-    private javax.swing.JTextField txtTotal;
-    private javax.swing.JTextField txtUserId;
     // End of variables declaration//GEN-END:variables
 }

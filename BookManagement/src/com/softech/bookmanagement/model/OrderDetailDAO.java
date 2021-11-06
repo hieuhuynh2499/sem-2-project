@@ -17,38 +17,17 @@ import java.util.List;
  */
 public class OrderDetailDAO {
     public boolean insert(OrderDetail order) throws Exception{
-        String sql = "INSERT INTO dbo.[OrderDetail] (OrderDetailID,Quantity,Price,OrderID,BookID,Total,Description,Amount)"+
-                "VALUES(?,?,?,?,?,?,?,?)";           
+        String sql = "INSERT INTO dbo.[OrderDetail] (NameBook,Quantity,Price,OrderID,BookID)"+
+                "VALUES(?,?,?,?,?)";           
         try(
             Connection  con = DatabaseHelper.connectSQLServer(); 
             PreparedStatement pstmt = con.prepareStatement(sql);
             ){
-            pstmt.setString(1,order.getOrderDetailID());
+            pstmt.setString(1,order.getNameBook());
             pstmt.setInt(2,order.getQuantity());
             pstmt.setFloat(3,order.getPrice());
             pstmt.setString(4,order.getOrderID());
             pstmt.setString(5,order.getBookID());
-            pstmt.setString(6,order.getTotal());
-            pstmt.setString(7,order.getDescription());
-            pstmt.setFloat(8,order.getAmount());
-            return pstmt.executeUpdate() > 0;
-      }
-    }
-    public boolean update(OrderDetail order) throws Exception{
-
-        String sql = "update [OrderDetail]"+
-                " SET Quantity = ?,Price = ?, Description=?,Total = ?,Amount = ?"+
-                " where OrderID = ?"; 
-        try(
-            Connection  con = DatabaseHelper.connectSQLServer(); 
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            ){
-            pstmt.setFloat(1,order.getQuantity());
-            pstmt.setFloat(2,order.getPrice());
-            pstmt.setString(3,order.getDescription());
-            pstmt.setString(4,order.getTotal());
-            pstmt.setFloat(5,order.getAmount());
-            pstmt.setString(6,order.getOrderID());
             return pstmt.executeUpdate() > 0;
       }
     }
@@ -62,6 +41,31 @@ public class OrderDetailDAO {
             pstmt.setString(1,empId);
            
             return pstmt.executeUpdate() > 0;
+      }
+    }
+    
+    public List<OrderDetail> findAll(String orderId) throws Exception{ 
+        String sql = "select  * from [OrderDetail] where OrderID = ?";           
+        try(
+            Connection  con = DatabaseHelper.connectSQLServer(); 
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ){
+            pstmt.setString(1,orderId);
+            try(ResultSet rs = pstmt.executeQuery();){
+                List<OrderDetail> list = new ArrayList<>();
+                while(rs.next()){
+                    OrderDetail emp = new OrderDetail();
+                    emp.setOrderDetailID(rs.getString("OrderDetailID"));
+                    emp.setOrderID(rs.getString("OrderID"));
+                    emp.setBookID(rs.getString("BookID"));
+                    emp.setPrice(rs.getFloat("Price"));
+                    emp.setNameBook(rs.getString("NameBook"));
+                    emp.setQuantity(rs.getInt("quantity"));
+                    list.add(emp);
+                }
+                System.out.println(list.size());
+                return list;
+            }
       }
     }
 }

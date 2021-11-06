@@ -6,6 +6,7 @@
 package com.softech.bookmanagement.model;
 
 import com.softech.bookmanagement.helpers.DatabaseHelper;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -65,6 +66,31 @@ public class BookDAO {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "An error occurred", "Message", 2);
         }
+    }
+    public static Book findBookByName(String nameBook) throws Exception {
+        String sql = "SELECT * FROM Book WHERE Title = ?";
+       try(
+              Connection  con = DatabaseHelper.connectSQLServer(); 
+            PreparedStatement pstmt = con.prepareStatement(sql);
+          ){
+           pstmt.setString(1, nameBook);
+        try(ResultSet rs = pstmt.executeQuery();){
+                while(rs.next()){
+                    Book emp = new Book();
+                    emp.setISBN(rs.getString("ISBN"));
+                    emp.setTitle(rs.getString("Title"));
+                    emp.setAuthor(rs.getString("Author"));
+                    emp.setPrice(rs.getFloat("Price"));
+                    emp.setImage("");
+                    emp.setDescription("");
+                    emp.setCategoryID("1");
+                    emp.setPublisherID("1");
+                    return emp;
+                }
+                return null;
+            }
+       }
+       
     }
 
 }

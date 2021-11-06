@@ -77,3 +77,33 @@ CREATE TABLE OrderDetail(
 	ON DELETE CASCADE
 	ON UPDATE CASCADE,
 )
+
+
+ALTER TABLE [Order]
+  ADD NameUser VARCHAR(200),
+
+ALTER TABLE [Order]
+  DROP COLUMN [Description];
+  
+ALTER TABLE [Order]
+  DROP COLUMN Total;
+  
+ALTER TABLE [Order]
+  DROP COLUMN Amount;
+
+
+DROP TABLE OrderDetail;
+CREATE TABLE OrderDetail(
+	OrderDetailID VARCHAR(10) PRIMARY KEY IDENTITY [( 1, 1)],
+	NameBook varchar(200) not null,
+	Quantity INT NOT NULL,
+	Price Decimal(2,0) NOT NULL,
+	OrderID VARCHAR(10),
+	BookID VARCHAR(20),
+	FOREIGN KEY(OrderID) REFERENCES dbo.[Order](OrderID)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE,
+	FOREIGN KEY(BookID) REFERENCES dbo.[Book](ISBN)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE,
+)

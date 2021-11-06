@@ -11,17 +11,8 @@ import java.sql.Date;
  * @author This PC
  */
 public class Order {
-    private String OrderId,UserID;
+    private String OrderId,UserID,nameUser;
     private Date CreateDate;
-
-    public Order() {
-    }
-
-    public Order(String OrderId,String UserID, Date CreateDate) {
-        this.OrderId = OrderId;
-        this.UserID = UserID;
-        this.CreateDate = CreateDate;
-    }
 
     public String getOrderId() {
         return OrderId;
@@ -39,11 +30,31 @@ public class Order {
         this.UserID = UserID;
     }
 
+    public String getNameUser() {
+        return nameUser;
+    }
+
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
+    }
+
     public Date getCreateDate() {
         return CreateDate;
     }
 
     public void setCreateDate(Date CreateDate) {
         this.CreateDate = CreateDate;
-    }  
+    }
+
+    public Order(String OrderId, String UserID, String nameUser, Date CreateDate) {
+        this.OrderId = OrderId;
+        this.UserID = UserID;
+        this.nameUser = nameUser;
+        this.CreateDate = CreateDate;
+    }
+
+    public Order() {
+    }
+
+   
 }
