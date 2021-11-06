@@ -28,6 +28,10 @@ public class Form_Profile extends javax.swing.JPanel {
         initComponents();
         LoadProfile(username);
         getusername = username;
+        btnSaveInfo.setSize(20, 20);
+        new SetImage().setImageButton(btnSaveInfo, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\save.png");
+        btnSavePass.setSize(20, 20);
+        new SetImage().setImageButton(btnSavePass, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\save.png");
     }
     void LoadProfile(String username){
         lbImage.setSize(168, 235);
@@ -71,11 +75,11 @@ public class Form_Profile extends javax.swing.JPanel {
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        btnSavePass = new keeptoo.KButton();
         txtNewPass = new javax.swing.JPasswordField();
         txtOldPass = new javax.swing.JPasswordField();
         txtConfirmPass = new javax.swing.JPasswordField();
         lbMessage = new javax.swing.JLabel();
+        btnSavePass = new javax.swing.JButton();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
         lbImage = new javax.swing.JLabel();
@@ -88,9 +92,9 @@ public class Form_Profile extends javax.swing.JPanel {
         jLabel23 = new javax.swing.JLabel();
         txtAddress = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        btnSaveInfo = new keeptoo.KButton();
         txtUsername = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
+        btnSaveInfo = new javax.swing.JButton();
 
         jPanel4.setBackground(new java.awt.Color(242, 242, 242));
 
@@ -195,7 +199,7 @@ public class Form_Profile extends javax.swing.JPanel {
         );
 
         setBackground(new java.awt.Color(242, 242, 242));
-        setPreferredSize(new java.awt.Dimension(919, 620));
+        setPreferredSize(new java.awt.Dimension(919, 751));
 
         jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(63, 43, 150));
@@ -213,21 +217,6 @@ public class Form_Profile extends javax.swing.JPanel {
         jLabel34.setForeground(new java.awt.Color(127, 127, 127));
         jLabel34.setText("Change Password");
 
-        btnSavePass.setText("SAVE CHANGE");
-        btnSavePass.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnSavePass.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnSavePass.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnSavePass.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnSavePass.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnSavePass.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnSavePass.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnSavePass.setkStartColor(new java.awt.Color(63, 43, 150));
-        btnSavePass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSavePassActionPerformed(evt);
-            }
-        });
-
         txtNewPass.setBackground(new java.awt.Color(242, 242, 242));
         txtNewPass.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
 
@@ -240,48 +229,54 @@ public class Form_Profile extends javax.swing.JPanel {
         lbMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbMessage.setForeground(new java.awt.Color(63, 43, 150));
 
+        btnSavePass.setBackground(new java.awt.Color(63, 43, 150));
+        btnSavePass.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSavePass.setForeground(new java.awt.Color(255, 255, 255));
+        btnSavePass.setText("   SAVE ");
+        btnSavePass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSavePassActionPerformed(evt);
+            }
+        });
+
         jLayeredPane3.setLayer(jLabel31, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jLabel32, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jLabel33, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jLabel34, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(btnSavePass, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(txtNewPass, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(txtOldPass, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(txtConfirmPass, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(lbMessage, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(btnSavePass, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
         jLayeredPane3.setLayout(jLayeredPane3Layout);
         jLayeredPane3Layout.setHorizontalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                .addGap(0, 45, Short.MAX_VALUE)
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel34)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
-                        .addGap(0, 20, Short.MAX_VALUE)
                         .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel34)
                             .addComponent(jLabel31)
                             .addComponent(jLabel33)
                             .addComponent(jLabel32)
                             .addComponent(txtNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbMessage))))
-                .addGap(20, 20, 20))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
-                .addGap(0, 81, Short.MAX_VALUE)
-                .addComponent(btnSavePass, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                            .addComponent(lbMessage))
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
+                        .addComponent(btnSavePass, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))))
         );
         jLayeredPane3Layout.setVerticalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addContainerGap()
                 .addComponent(jLabel34)
-                .addGap(26, 26, 26)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel31)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtOldPass, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,11 +288,11 @@ public class Form_Profile extends javax.swing.JPanel {
                 .addComponent(jLabel33)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(64, 64, 64)
                 .addComponent(btnSavePass, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
                 .addComponent(lbMessage)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -316,6 +311,7 @@ public class Form_Profile extends javax.swing.JPanel {
             .addComponent(lbImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        btnBrowser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/softech/bookmanagement/icon/open-folder.png"))); // NOI18N
         btnBrowser.setText("Browser");
         btnBrowser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -386,21 +382,6 @@ public class Form_Profile extends javax.swing.JPanel {
         jLabel24.setForeground(new java.awt.Color(127, 127, 127));
         jLabel24.setText("Profile Management");
 
-        btnSaveInfo.setText("SAVE CHANGE");
-        btnSaveInfo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnSaveInfo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnSaveInfo.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnSaveInfo.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnSaveInfo.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnSaveInfo.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnSaveInfo.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnSaveInfo.setkStartColor(new java.awt.Color(63, 43, 150));
-        btnSaveInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveInfoActionPerformed(evt);
-            }
-        });
-
         txtUsername.setBackground(new java.awt.Color(242, 242, 242));
         txtUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtUsername.setToolTipText("");
@@ -410,6 +391,16 @@ public class Form_Profile extends javax.swing.JPanel {
         jLabel25.setForeground(new java.awt.Color(63, 43, 150));
         jLabel25.setText("Username");
 
+        btnSaveInfo.setBackground(new java.awt.Color(63, 43, 150));
+        btnSaveInfo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSaveInfo.setForeground(new java.awt.Color(255, 255, 255));
+        btnSaveInfo.setText("   SAVE ");
+        btnSaveInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveInfoActionPerformed(evt);
+            }
+        });
+
         jLayeredPane1.setLayer(txtFullname, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel21, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel22, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -417,9 +408,9 @@ public class Form_Profile extends javax.swing.JPanel {
         jLayeredPane1.setLayer(jLabel23, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtAddress, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel24, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(btnSaveInfo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(txtUsername, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel25, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnSaveInfo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -437,10 +428,10 @@ public class Form_Profile extends javax.swing.JPanel {
                         .addComponent(txtFullname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel25)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addComponent(btnSaveInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel24))
+                        .addComponent(btnSaveInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
@@ -464,7 +455,7 @@ public class Form_Profile extends javax.swing.JPanel {
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(47, 47, 47)
                 .addComponent(btnSaveInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -480,16 +471,16 @@ public class Form_Profile extends javax.swing.JPanel {
                 .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayeredPane3)
-                    .addComponent(jLayeredPane1)
-                    .addComponent(jLayeredPane2)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLayeredPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLayeredPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -500,6 +491,30 @@ public class Form_Profile extends javax.swing.JPanel {
     private void txtPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPhoneActionPerformed
+
+    private void btnBrowserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowserActionPerformed
+        JFileChooser fileChooser = new JFileChooser("image");
+        FileFilter filter = new FileNameExtensionFilter("*.Images", "gjf", "jpg", "png");
+        fileChooser.addChoosableFileFilter(filter);
+   
+        fileChooser.setMultiSelectionEnabled(false);
+
+        int action = fileChooser.showOpenDialog(this);
+        if (action == JFileChooser.APPROVE_OPTION) {
+            while (true) {
+                if (!fileChooser.getSelectedFile().getName().matches("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")) {
+                    JOptionPane.showMessageDialog(null, "Định dạng file hình đuôi phải là GIF, JPG, PNG !");
+                    return;
+                } else {
+                    break;
+                }
+            }
+            File selectedFile = fileChooser.getSelectedFile();
+            String Path = selectedFile.getAbsolutePath();
+            imgFile = fileChooser.getSelectedFile().getName();
+            img.setImageLabel(lbImage, "image//" + imgFile);
+        }
+    }//GEN-LAST:event_btnBrowserActionPerformed
 
     private void btnSaveInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveInfoActionPerformed
         StringBuilder sb = new StringBuilder();
@@ -576,42 +591,19 @@ public class Form_Profile extends javax.swing.JPanel {
                 user.setUserid(UserID);
                 UserDAO dao = new UserDAO();
                 dao.UpdatePassword(user);
+                lbMessage.setText("");
             }
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btnSavePassActionPerformed
 
-    private void btnBrowserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowserActionPerformed
-        JFileChooser fileChooser = new JFileChooser("image");
-        FileFilter filter = new FileNameExtensionFilter("*.Images", "gjf", "jpg", "png");
-        fileChooser.addChoosableFileFilter(filter);
-   
-        fileChooser.setMultiSelectionEnabled(false);
-
-        int action = fileChooser.showOpenDialog(this);
-        if (action == JFileChooser.APPROVE_OPTION) {
-            while (true) {
-                if (!fileChooser.getSelectedFile().getName().matches("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")) {
-                    JOptionPane.showMessageDialog(null, "Định dạng file hình đuôi phải là GIF, JPG, PNG !");
-                    return;
-                } else {
-                    break;
-                }
-            }
-            File selectedFile = fileChooser.getSelectedFile();
-            String Path = selectedFile.getAbsolutePath();
-            imgFile = fileChooser.getSelectedFile().getName();
-            img.setImageLabel(lbImage, "image//" + imgFile);
-        }
-    }//GEN-LAST:event_btnBrowserActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private keeptoo.KButton btnAdd3;
     private javax.swing.JButton btnBrowser;
-    private keeptoo.KButton btnSaveInfo;
-    private keeptoo.KButton btnSavePass;
+    private javax.swing.JButton btnSaveInfo;
+    private javax.swing.JButton btnSavePass;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;

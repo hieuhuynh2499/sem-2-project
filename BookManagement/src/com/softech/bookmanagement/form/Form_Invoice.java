@@ -94,6 +94,10 @@ public class Form_Invoice extends javax.swing.JPanel {
         txtBookId = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(242, 242, 242));
+        setPreferredSize(new java.awt.Dimension(919, 620));
+
+        txtOrderId.setBackground(new java.awt.Color(242, 242, 242));
         txtOrderId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtOrderId.setToolTipText("");
         txtOrderId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
@@ -104,8 +108,9 @@ public class Form_Invoice extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(63, 43, 150));
-        jLabel2.setText("Tatal");
+        jLabel2.setText("Total");
 
+        txtTotal.setBackground(new java.awt.Color(242, 242, 242));
         txtTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTotal.setToolTipText("");
         txtTotal.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
@@ -119,6 +124,7 @@ public class Form_Invoice extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(63, 43, 150));
         jLabel5.setText("UserId");
 
+        txtUserId.setBackground(new java.awt.Color(242, 242, 242));
         txtUserId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtUserId.setToolTipText("");
         txtUserId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
@@ -127,6 +133,7 @@ public class Form_Invoice extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(63, 43, 150));
         jLabel4.setText("Amount");
 
+        txtAmount.setBackground(new java.awt.Color(242, 242, 242));
         txtAmount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtAmount.setToolTipText("");
         txtAmount.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
@@ -211,11 +218,9 @@ public class Form_Invoice extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(spTable, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                    .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 894, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,6 +240,7 @@ public class Form_Invoice extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(63, 43, 150));
         jLabel7.setText("Price");
 
+        txtPrice.setBackground(new java.awt.Color(242, 242, 242));
         txtPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtPrice.setToolTipText("");
         txtPrice.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
@@ -247,6 +253,7 @@ public class Form_Invoice extends javax.swing.JPanel {
         cbDescription.setRows(5);
         jScrollPane1.setViewportView(cbDescription);
 
+        txtQuantity.setBackground(new java.awt.Color(242, 242, 242));
         txtQuantity.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtQuantity.setToolTipText("");
         txtQuantity.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
@@ -289,9 +296,9 @@ public class Form_Invoice extends javax.swing.JPanel {
                 .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnAdd.setText("ADD");
@@ -301,6 +308,7 @@ public class Form_Invoice extends javax.swing.JPanel {
         btnAdd.setkHoverEndColor(new java.awt.Color(63, 43, 150));
         btnAdd.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         btnAdd.setkHoverStartColor(new java.awt.Color(168, 192, 255));
+        btnAdd.setkSelectedColor(new java.awt.Color(63, 43, 150));
         btnAdd.setkStartColor(new java.awt.Color(63, 43, 150));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,6 +322,7 @@ public class Form_Invoice extends javax.swing.JPanel {
         kButton3.setkHoverEndColor(new java.awt.Color(63, 43, 150));
         kButton3.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         kButton3.setkHoverStartColor(new java.awt.Color(168, 192, 255));
+        kButton3.setkSelectedColor(new java.awt.Color(63, 43, 150));
         kButton3.setkStartColor(new java.awt.Color(63, 43, 150));
         kButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -321,6 +330,7 @@ public class Form_Invoice extends javax.swing.JPanel {
             }
         });
 
+        txtBookId.setBackground(new java.awt.Color(242, 242, 242));
         txtBookId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtBookId.setToolTipText("");
         txtBookId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(63, 43, 150)));
@@ -374,28 +384,28 @@ public class Form_Invoice extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(20, 20, 20))
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel)
-                    .addComponent(panel3)
-                    .addComponent(panel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(panel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(panel, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
    

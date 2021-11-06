@@ -79,7 +79,6 @@ public class frmAdminManagement extends javax.swing.JFrame {
     private void initComponents() {
 
         mainPanel1 = new com.softech.bookmanagement.swing.MainPanel();
-        header1 = new com.softech.bookmanagement.components.Header();
         mainPanel = new javax.swing.JPanel();
         menu2 = new com.softech.bookmanagement.components.Menu();
 
@@ -99,17 +98,12 @@ public class frmAdminManagement extends javax.swing.JFrame {
             .addGroup(mainPanel1Layout.createSequentialGroup()
                 .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addGroup(mainPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(header1, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE)))
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE))
         );
         mainPanel1Layout.setVerticalGroup(
             mainPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanel1Layout.createSequentialGroup()
-                .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(menu2, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -163,7 +157,6 @@ public class frmAdminManagement extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.softech.bookmanagement.components.Header header1;
     private javax.swing.JPanel mainPanel;
     private com.softech.bookmanagement.swing.MainPanel mainPanel1;
     private com.softech.bookmanagement.components.Menu menu2;

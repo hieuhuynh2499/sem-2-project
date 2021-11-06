@@ -66,4 +66,5 @@ public class BookDAO {
             JOptionPane.showMessageDialog(null, "An error occurred", "Message", 2);
         }
     }
+
 }

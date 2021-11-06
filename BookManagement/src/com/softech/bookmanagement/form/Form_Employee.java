@@ -34,6 +34,12 @@ public class Form_Employee extends javax.swing.JPanel {
         initTable();
         loadTable();
         LoadRole();
+        btnAdd.setSize(20, 20);
+        new SetImage().setImageButton(btnAdd, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\add.png");
+        btnUpdate.setSize(20, 20);
+        new SetImage().setImageButton(btnUpdate, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\pencil.png");
+        btnDelete.setSize(20, 20);
+        new SetImage().setImageButton(btnDelete, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\bin.png");
     }
 
     private void initTable (){
@@ -96,12 +102,16 @@ public class Form_Employee extends javax.swing.JPanel {
         panel3 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
         lbImage = new javax.swing.JLabel();
-        btnAdd = new keeptoo.KButton();
-        btnUpdate = new keeptoo.KButton();
-        btnDelete = new keeptoo.KButton();
+        btnAdd = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        searchemp = new com.softech.bookmanagement.swing.SearchText();
 
         setBackground(new java.awt.Color(242, 242, 242));
-        setPreferredSize(new java.awt.Dimension(919, 620));
+        setPreferredSize(new java.awt.Dimension(919, 751));
 
         txtId.setBackground(new java.awt.Color(242, 242, 242));
         txtId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -310,43 +320,30 @@ public class Form_Employee extends javax.swing.JPanel {
             .addComponent(lbImage, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
         );
 
-        btnAdd.setText("ADD");
+        btnAdd.setBackground(new java.awt.Color(63, 43, 150));
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnAdd.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnAdd.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnAdd.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnAdd.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnAdd.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnAdd.setkStartColor(new java.awt.Color(63, 43, 150));
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdd.setText("   ADD");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
 
-        btnUpdate.setText("UPDATE");
+        btnUpdate.setBackground(new java.awt.Color(63, 43, 150));
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnUpdate.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnUpdate.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnUpdate.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnUpdate.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnUpdate.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnUpdate.setkStartColor(new java.awt.Color(63, 43, 150));
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdate.setText("   UPDATE");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
             }
         });
 
-        btnDelete.setText("DELETE");
+        btnDelete.setBackground(new java.awt.Color(63, 43, 150));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDelete.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnDelete.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnDelete.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnDelete.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnDelete.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnDelete.setkStartColor(new java.awt.Color(63, 43, 150));
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setText("   DELETE");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -367,9 +364,9 @@ public class Form_Employee extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,10 +377,50 @@ public class Form_Employee extends javax.swing.JPanel {
                     .addGroup(panel3Layout.createSequentialGroup()
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/softech/bookmanagement/icon/search.png"))); // NOI18N
+
+        searchemp.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        searchemp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchempActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchemp, javax.swing.GroupLayout.PREFERRED_SIZE, 883, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+            .addComponent(searchemp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -399,21 +436,22 @@ public class Form_Employee extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(20, 20, 20))
+                        .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(panel2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panel3))
+                    .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     private void setFieldEmpty(){
@@ -426,6 +464,40 @@ public class Form_Employee extends javax.swing.JPanel {
     private void txtPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPhoneActionPerformed
+
+    private void tblEmplyeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmplyeeMouseClicked
+        tblModel = (DefaultTableModel) tblEmplyee.getModel();
+        int selectedrowindex = tblEmplyee.getSelectedRow();
+        txtId.setText(tblModel.getValueAt(selectedrowindex, 0).toString());
+        try
+        {
+            String sql = "Select * from [User] where UserID = ?";
+            PreparedStatement pstmt1 =  DatabaseHelper.connectSQLServer().prepareStatement(sql);
+            pstmt1.setString(1, txtId.getText());
+            ResultSet rs1 = pstmt1.executeQuery();
+            if (rs1.next()) {
+                txtFullname.setText(rs1.getString("Fullname"));
+                txtAddress.setText(rs1.getString("Address"));
+                txtPhone.setText(rs1.getString("Phone"));
+                txtUsername.setText(rs1.getString("Username"));
+                cbRole.setSelectedItem(tblModel.getValueAt(selectedrowindex, 5).toString());
+                if(rs1.getString("Image") != null)
+                {
+                    img.setImageLabel(lbImage, "image//" + rs1.getString("Image"));
+                }
+                else
+                {
+                    lbImage.setIcon(null);
+                }
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_tblEmplyeeMouseClicked
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
@@ -454,7 +526,7 @@ public class Form_Employee extends javax.swing.JPanel {
             emp.setPhone(txtPhone.getText());
             emp.setAddress(txtAddress.getText());
             emp.setUsername(txtUsername.getText());
-//            emp.setPassword("bookshop");
+            emp.setPassword("bookshop");
 //            emp.setStatus(1);
 //            emp.setRoleID(cbRole.getSelectedItem().toString() == "admin"?"1":"2");
             emp.setRoleID(RoleID);
@@ -555,59 +627,33 @@ public class Form_Employee extends javax.swing.JPanel {
         setFieldEmpty();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void tblEmplyeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmplyeeMouseClicked
-        tblModel = (DefaultTableModel) tblEmplyee.getModel();
-        int selectedrowindex = tblEmplyee.getSelectedRow();
-        txtId.setText(tblModel.getValueAt(selectedrowindex, 0).toString());
-        try
-        {
-            String sql = "Select * from [User] where UserID = ?";
-            PreparedStatement pstmt1 =  DatabaseHelper.connectSQLServer().prepareStatement(sql);
-            pstmt1.setString(1, txtId.getText());
-            ResultSet rs1 = pstmt1.executeQuery();
-            if (rs1.next()) {
-                txtFullname.setText(rs1.getString("Fullname"));
-                txtAddress.setText(rs1.getString("Address"));
-                txtPhone.setText(rs1.getString("Phone"));
-                txtUsername.setText(rs1.getString("Username"));
-                cbRole.setSelectedItem(tblModel.getValueAt(selectedrowindex, 5).toString());
-                if(rs1.getString("Image") != null)
-                {
-                    img.setImageLabel(lbImage, "image//" + rs1.getString("Image"));
-                }
-                else
-                {
-                    lbImage.setIcon(null);
-                }
-            }
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-        }
-    }//GEN-LAST:event_tblEmplyeeMouseClicked
-
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+    private void searchempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchempActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
+    }//GEN-LAST:event_searchempActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private keeptoo.KButton btnAdd;
-    private keeptoo.KButton btnDelete;
-    private keeptoo.KButton btnUpdate;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cbRole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbImage;
     private javax.swing.JLayeredPane panel;
     private javax.swing.JLayeredPane panel2;
     private javax.swing.JLayeredPane panel3;
     private com.softech.bookmanagement.swing.PanelBorder panelBorder1;
+    private com.softech.bookmanagement.swing.SearchText searchemp;
     private javax.swing.JScrollPane spTable;
     private com.softech.bookmanagement.swing.Table tblEmplyee;
     private javax.swing.JTextField txtAddress;

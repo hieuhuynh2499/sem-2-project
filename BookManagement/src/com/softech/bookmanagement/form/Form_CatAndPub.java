@@ -37,6 +37,18 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         loadTableCate();
         initTablePub ();
         loadTablePub();
+        btnAddPub.setSize(20, 20);
+        new SetImage().setImageButton(btnAddPub, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\add.png");
+        btnUpdatePub.setSize(20, 20);
+        new SetImage().setImageButton(btnUpdatePub, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\pencil.png");
+        btnDeletePub.setSize(20, 20);
+        new SetImage().setImageButton(btnDeletePub, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\bin.png");
+        btnAddCat.setSize(20, 20);
+        new SetImage().setImageButton(btnAddCat, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\add.png");
+        btnUpdateCat.setSize(20, 20);
+        new SetImage().setImageButton(btnUpdateCat, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\pencil.png");
+        btnDeleteCat.setSize(20, 20);
+        new SetImage().setImageButton(btnDeleteCat, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\bin.png");
     }
 
     private void initTableCate (){
@@ -88,11 +100,11 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         panel = new javax.swing.JLayeredPane();
         txtCategoryName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        btnAddCat = new keeptoo.KButton();
-        btnDeleteCat = new keeptoo.KButton();
-        btnUpdateCat = new keeptoo.KButton();
         txtCategoryId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        btnAddCat = new javax.swing.JButton();
+        btnUpdateCat = new javax.swing.JButton();
+        btnDeleteCat = new javax.swing.JButton();
         panelBorder1 = new com.softech.bookmanagement.swing.PanelBorder();
         jLabel1 = new javax.swing.JLabel();
         spTable = new javax.swing.JScrollPane();
@@ -113,13 +125,16 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         panel3 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
         lbImage = new javax.swing.JLabel();
-        btnUpdatePub = new keeptoo.KButton();
-        btnDeletePub = new keeptoo.KButton();
         btnBrowser = new javax.swing.JButton();
-        btnAddPub = new keeptoo.KButton();
+        btnAddPub = new javax.swing.JButton();
+        btnUpdatePub = new javax.swing.JButton();
+        btnDeletePub = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        searchcat = new com.softech.bookmanagement.swing.SearchText();
 
         setBackground(new java.awt.Color(242, 242, 242));
-        setPreferredSize(new java.awt.Dimension(919, 620));
+        setPreferredSize(new java.awt.Dimension(919, 751));
 
         panel.setPreferredSize(new java.awt.Dimension(279, 252));
         panel.setRequestFocusEnabled(false);
@@ -133,51 +148,6 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(63, 43, 150));
         jLabel3.setText("Category Name");
 
-        btnAddCat.setText("ADD");
-        btnAddCat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAddCat.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnAddCat.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnAddCat.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnAddCat.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnAddCat.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnAddCat.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnAddCat.setkStartColor(new java.awt.Color(63, 43, 150));
-        btnAddCat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddCatActionPerformed(evt);
-            }
-        });
-
-        btnDeleteCat.setText("DELETE");
-        btnDeleteCat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDeleteCat.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnDeleteCat.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnDeleteCat.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnDeleteCat.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnDeleteCat.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnDeleteCat.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnDeleteCat.setkStartColor(new java.awt.Color(63, 43, 150));
-        btnDeleteCat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteCatActionPerformed(evt);
-            }
-        });
-
-        btnUpdateCat.setText("UPDATE");
-        btnUpdateCat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnUpdateCat.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnUpdateCat.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnUpdateCat.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnUpdateCat.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnUpdateCat.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnUpdateCat.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnUpdateCat.setkStartColor(new java.awt.Color(63, 43, 150));
-        btnUpdateCat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateCatActionPerformed(evt);
-            }
-        });
-
         txtCategoryId.setBackground(new java.awt.Color(242, 242, 242));
         txtCategoryId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCategoryId.setToolTipText("");
@@ -187,13 +157,43 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(63, 43, 150));
         jLabel4.setText("Category Id");
 
+        btnAddCat.setBackground(new java.awt.Color(63, 43, 150));
+        btnAddCat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAddCat.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddCat.setText("     ADD");
+        btnAddCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddCatActionPerformed(evt);
+            }
+        });
+
+        btnUpdateCat.setBackground(new java.awt.Color(63, 43, 150));
+        btnUpdateCat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUpdateCat.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdateCat.setText("   UPDATE");
+        btnUpdateCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateCatActionPerformed(evt);
+            }
+        });
+
+        btnDeleteCat.setBackground(new java.awt.Color(63, 43, 150));
+        btnDeleteCat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDeleteCat.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteCat.setText("    DELETE");
+        btnDeleteCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteCatActionPerformed(evt);
+            }
+        });
+
         panel.setLayer(txtCategoryName, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(btnAddCat, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(btnDeleteCat, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel.setLayer(btnUpdateCat, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(txtCategoryId, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(btnAddCat, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(btnUpdateCat, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(btnDeleteCat, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -202,16 +202,16 @@ public class Form_CatAndPub extends javax.swing.JPanel {
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAddCat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDeleteCat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                    .addComponent(btnUpdateCat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtCategoryId)
                     .addComponent(txtCategoryName)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnAddCat, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                    .addComponent(btnUpdateCat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                    .addComponent(btnDeleteCat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
@@ -226,11 +226,11 @@ public class Form_CatAndPub extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnAddCat, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAddCat, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnUpdateCat, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdateCat, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnDeleteCat, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDeleteCat, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -433,78 +433,66 @@ public class Form_CatAndPub extends javax.swing.JPanel {
             .addComponent(lbImage, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
         );
 
-        btnUpdatePub.setText("UPDATE");
-        btnUpdatePub.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnUpdatePub.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnUpdatePub.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnUpdatePub.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnUpdatePub.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnUpdatePub.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnUpdatePub.setkStartColor(new java.awt.Color(63, 43, 150));
-        btnUpdatePub.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdatePubActionPerformed(evt);
-            }
-        });
-
-        btnDeletePub.setText("DELETE");
-        btnDeletePub.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDeletePub.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnDeletePub.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnDeletePub.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnDeletePub.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnDeletePub.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnDeletePub.setkStartColor(new java.awt.Color(63, 43, 150));
-        btnDeletePub.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeletePubActionPerformed(evt);
-            }
-        });
-
-        btnBrowser.setText("Browser");
+        btnBrowser.setText("Browse");
         btnBrowser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBrowserActionPerformed(evt);
             }
         });
 
-        btnAddPub.setText("ADD");
+        btnAddPub.setBackground(new java.awt.Color(63, 43, 150));
         btnAddPub.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAddPub.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnAddPub.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnAddPub.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnAddPub.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnAddPub.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnAddPub.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnAddPub.setkStartColor(new java.awt.Color(63, 43, 150));
+        btnAddPub.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddPub.setText("   ADD");
         btnAddPub.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddPubActionPerformed(evt);
             }
         });
 
+        btnUpdatePub.setBackground(new java.awt.Color(63, 43, 150));
+        btnUpdatePub.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUpdatePub.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdatePub.setText("   UPDATE");
+        btnUpdatePub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdatePubActionPerformed(evt);
+            }
+        });
+
+        btnDeletePub.setBackground(new java.awt.Color(63, 43, 150));
+        btnDeletePub.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDeletePub.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeletePub.setText("   DELETE");
+        btnDeletePub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletePubActionPerformed(evt);
+            }
+        });
+
         panel3.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel3.setLayer(btnUpdatePub, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel3.setLayer(btnDeletePub, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(btnBrowser, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(btnAddPub, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel3.setLayer(btnUpdatePub, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel3.setLayer(btnDeletePub, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
         panel3.setLayout(panel3Layout);
         panel3Layout.setHorizontalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(btnBrowser, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAddPub, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                    .addComponent(btnUpdatePub, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnDeletePub, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-            .addGroup(panel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(btnBrowser, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnUpdatePub, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                    .addComponent(btnDeletePub, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -512,16 +500,44 @@ public class Form_CatAndPub extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel3Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBrowser))
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(btnAddPub, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnUpdatePub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDeletePub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBrowser)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdatePub, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDeletePub, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(60, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/softech/bookmanagement/icon/search.png"))); // NOI18N
+
+        searchcat.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        searchcat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchcatActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchcat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+            .addComponent(searchcat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -539,11 +555,13 @@ public class Form_CatAndPub extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(33, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
@@ -551,7 +569,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
                     .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -563,90 +581,69 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPublisherNameActionPerformed
 
-    private void btnAddCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCatActionPerformed
-        // TODO add your handling code here:
-        StringBuilder sb = new StringBuilder();
-        DataValidator.validateEmpty(txtCategoryId, sb," Category is not empty");
-        DataValidator.validateEmpty(txtCategoryName, sb," CategoryName is not empty");
-  
-        if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
-            return ;
-        }
-        try{
-            Category cate = new Category();
-           cate.setCategoryId(txtCategoryId.getText());
-           cate.setCategoryName(txtCategoryName.getText());
-            CategoryDAO cateDAO = new CategoryDAO();
-            if(cateDAO.insert(cate)){
-                MessageDialogHelper.showMessageDialog(null,"Category is saved in database", "notification");
-            }else{
-                MessageDialogHelper.showConfirmDialog(null, "Category is save failed", "notification");
-            }
-            
-        }catch(Exception e){
-            e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
-        }
-        initTableCate();
-        loadTableCate();
-    }//GEN-LAST:event_btnAddCatActionPerformed
+    private void tblCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoryMouseClicked
+        tblModel = (DefaultTableModel) tblCategory.getModel();
+        int selectedrowindex = tblCategory.getSelectedRow();
+        txtCategoryId.setText(tblModel.getValueAt(selectedrowindex, 0).toString());
+        txtCategoryName.setText(tblModel.getValueAt(selectedrowindex, 1).toString());
+    }//GEN-LAST:event_tblCategoryMouseClicked
 
-    private void btnUpdateCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCatActionPerformed
-        // TODO add your handling code here:
-        StringBuilder sb = new StringBuilder();
-        DataValidator.validateEmpty(txtCategoryId, sb," Category is not empty");
-        DataValidator.validateEmpty(txtCategoryName, sb," CategoryName is not empty");
-  
-        if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
-            return ;
-        }
+    private void tblPublisherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPublisherMouseClicked
+        tblModel = (DefaultTableModel) tblPublisher.getModel();
+        int selectedrowindex = tblPublisher.getSelectedRow();
+        txtPublisherId.setText(tblModel.getValueAt(selectedrowindex, 0).toString());
         try{
-            Category cate = new Category();
-           cate.setCategoryId(txtCategoryId.getText());
-           cate.setCategoryName(txtCategoryName.getText());
-            CategoryDAO cateDAO = new CategoryDAO();
-            if(cateDAO.update(cate)){
-                MessageDialogHelper.showMessageDialog(null,"Category is saved in database", "notification");
-            }else{
-                MessageDialogHelper.showConfirmDialog(null, "Category is save failed", "notification");
+        String sql = "Select * from Publisher where PublisherID = ?";
+        PreparedStatement pstmt1 =  DatabaseHelper.connectSQLServer().prepareStatement(sql);
+            pstmt1.setString(1, txtPublisherId.getText());
+            ResultSet rs1 = pstmt1.executeQuery();
+            if (rs1.next()) {
+                String Name = rs1.getString("PublisherName");
+                 txtPublisherName.setText(Name);
+                String Phone = rs1.getString("Phone");
+                txtPublisherPhone.setText(Phone);
+                String Address = rs1.getString("Address");
+                txtPublisherAddress.setText(Address);
+                String Email = rs1.getString("Email");
+                txtPublisherEmail.setText(Email);
+                if(rs1.getString("Image") != null)
+                {
+                    img.setImageLabel(lbImage, "image//" + rs1.getString("Image"));
+                }
+                else
+                {
+                    lbImage.setIcon(null);
+                }
             }
-            
-        }catch(Exception e){
-            e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
         }
-        initTableCate();
-        loadTableCate();
-    }//GEN-LAST:event_btnUpdateCatActionPerformed
+    }//GEN-LAST:event_tblPublisherMouseClicked
 
-    private void btnDeleteCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCatActionPerformed
-        // TODO add your handling code here:
-         StringBuilder sb = new StringBuilder();
-        if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
-            return ;
+    private void btnBrowserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowserActionPerformed
+        JFileChooser fileChooser = new JFileChooser("image");
+        FileFilter filter = new FileNameExtensionFilter("*.Images", "gjf", "jpg", "png");
+        fileChooser.addChoosableFileFilter(filter);
+   
+        fileChooser.setMultiSelectionEnabled(false);
+
+        int action = fileChooser.showOpenDialog(this);
+        if (action == JFileChooser.APPROVE_OPTION) {
+            while (true) {
+                if (!fileChooser.getSelectedFile().getName().matches("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")) {
+                    JOptionPane.showMessageDialog(null, "Định dạng file hình đuôi phải là GIF, JPG, PNG !");
+                    return;
+                } else {
+                    break;
+                }
+            }
+            File selectedFile = fileChooser.getSelectedFile();
+            String Path = selectedFile.getAbsolutePath();
+            imgFile = fileChooser.getSelectedFile().getName();
+//            txtHinh.setText(imgFile);
+            img.setImageLabel(lbImage, "image//" + imgFile);
         }
-        
-        if(MessageDialogHelper.showConfirmDialog(null,"are you sure","question") == JOptionPane.NO_OPTION){
-            return;
-        }
-        
-        try{
-            CategoryDAO cateDAO = new CategoryDAO();
-            if(cateDAO.delete(txtCategoryId.getText())){
-                MessageDialogHelper.showMessageDialog(null,"Employee is delete success", "notification");
-            }else{
-                MessageDialogHelper.showConfirmDialog(null, "Employee is delete failed", "notification");
-            } 
-        }catch(Exception e){
-            e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
-        }
-        initTableCate();
-        loadTableCate();
-    }//GEN-LAST:event_btnDeleteCatActionPerformed
+    }//GEN-LAST:event_btnBrowserActionPerformed
 
     private void btnAddPubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPubActionPerformed
         // TODO add your handling code here:
@@ -735,80 +732,106 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         loadTablePub();
     }//GEN-LAST:event_btnDeletePubActionPerformed
 
-    private void tblCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoryMouseClicked
-        tblModel = (DefaultTableModel) tblCategory.getModel();
-        int selectedrowindex = tblCategory.getSelectedRow();
-        txtCategoryId.setText(tblModel.getValueAt(selectedrowindex, 0).toString());
-        txtCategoryName.setText(tblModel.getValueAt(selectedrowindex, 1).toString());
-    }//GEN-LAST:event_tblCategoryMouseClicked
-
-    private void tblPublisherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPublisherMouseClicked
-        tblModel = (DefaultTableModel) tblPublisher.getModel();
-        int selectedrowindex = tblPublisher.getSelectedRow();
-        txtPublisherId.setText(tblModel.getValueAt(selectedrowindex, 0).toString());
+    private void btnAddCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCatActionPerformed
+        // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder();
+        DataValidator.validateEmpty(txtCategoryId, sb," Category is not empty");
+        DataValidator.validateEmpty(txtCategoryName, sb," CategoryName is not empty");
+  
+        if(sb.length() > 0){
+            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
+            return ;
+        }
         try{
-        String sql = "Select * from Publisher where PublisherID = ?";
-        PreparedStatement pstmt1 =  DatabaseHelper.connectSQLServer().prepareStatement(sql);
-            pstmt1.setString(1, txtPublisherId.getText());
-            ResultSet rs1 = pstmt1.executeQuery();
-            if (rs1.next()) {
-                String Name = rs1.getString("PublisherName");
-                 txtPublisherName.setText(Name);
-                String Phone = rs1.getString("Phone");
-                txtPublisherPhone.setText(Phone);
-                String Address = rs1.getString("Address");
-                txtPublisherAddress.setText(Address);
-                String Email = rs1.getString("Email");
-                txtPublisherEmail.setText(Email);
-                if(rs1.getString("Image") != null)
-                {
-                    img.setImageLabel(lbImage, "image//" + rs1.getString("Image"));
-                }
-                else
-                {
-                    lbImage.setIcon(null);
-                }
+            Category cate = new Category();
+           cate.setCategoryId(txtCategoryId.getText());
+           cate.setCategoryName(txtCategoryName.getText());
+            CategoryDAO cateDAO = new CategoryDAO();
+            if(cateDAO.insert(cate)){
+                MessageDialogHelper.showMessageDialog(null,"Category is saved in database", "notification");
+            }else{
+                MessageDialogHelper.showConfirmDialog(null, "Category is save failed", "notification");
             }
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
         }
-    }//GEN-LAST:event_tblPublisherMouseClicked
+        initTableCate();
+        loadTableCate();
+    }//GEN-LAST:event_btnAddCatActionPerformed
 
-    private void btnBrowserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowserActionPerformed
-        JFileChooser fileChooser = new JFileChooser("image");
-        FileFilter filter = new FileNameExtensionFilter("*.Images", "gjf", "jpg", "png");
-        fileChooser.addChoosableFileFilter(filter);
-   
-        fileChooser.setMultiSelectionEnabled(false);
-
-        int action = fileChooser.showOpenDialog(this);
-        if (action == JFileChooser.APPROVE_OPTION) {
-            while (true) {
-                if (!fileChooser.getSelectedFile().getName().matches("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")) {
-                    JOptionPane.showMessageDialog(null, "Định dạng file hình đuôi phải là GIF, JPG, PNG !");
-                    return;
-                } else {
-                    break;
-                }
+    private void btnUpdateCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCatActionPerformed
+        // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder();
+        DataValidator.validateEmpty(txtCategoryId, sb," Category is not empty");
+        DataValidator.validateEmpty(txtCategoryName, sb," CategoryName is not empty");
+  
+        if(sb.length() > 0){
+            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
+            return ;
+        }
+        try{
+            Category cate = new Category();
+           cate.setCategoryId(txtCategoryId.getText());
+           cate.setCategoryName(txtCategoryName.getText());
+            CategoryDAO cateDAO = new CategoryDAO();
+            if(cateDAO.update(cate)){
+                MessageDialogHelper.showMessageDialog(null,"Category is saved in database", "notification");
+            }else{
+                MessageDialogHelper.showConfirmDialog(null, "Category is save failed", "notification");
             }
-            File selectedFile = fileChooser.getSelectedFile();
-            String Path = selectedFile.getAbsolutePath();
-            imgFile = fileChooser.getSelectedFile().getName();
-//            txtHinh.setText(imgFile);
-            img.setImageLabel(lbImage, "image//" + imgFile);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
         }
-    }//GEN-LAST:event_btnBrowserActionPerformed
+        initTableCate();
+        loadTableCate();
+    }//GEN-LAST:event_btnUpdateCatActionPerformed
+
+    private void btnDeleteCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCatActionPerformed
+        // TODO add your handling code here:
+         StringBuilder sb = new StringBuilder();
+        if(sb.length() > 0){
+            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
+            return ;
+        }
+        
+        if(MessageDialogHelper.showConfirmDialog(null,"are you sure","question") == JOptionPane.NO_OPTION){
+            return;
+        }
+        
+        try{
+            CategoryDAO cateDAO = new CategoryDAO();
+            if(cateDAO.delete(txtCategoryId.getText())){
+                MessageDialogHelper.showMessageDialog(null,"Employee is delete success", "notification");
+            }else{
+                MessageDialogHelper.showConfirmDialog(null, "Employee is delete failed", "notification");
+            } 
+        }catch(Exception e){
+            e.printStackTrace();
+            MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
+        }
+        initTableCate();
+        loadTableCate();
+    }//GEN-LAST:event_btnDeleteCatActionPerformed
+
+    private void searchcatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchcatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchcatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private keeptoo.KButton btnAddCat;
-    private keeptoo.KButton btnAddPub;
+    private javax.swing.JButton btnAddCat;
+    private javax.swing.JButton btnAddPub;
     private javax.swing.JButton btnBrowser;
-    private keeptoo.KButton btnDeleteCat;
-    private keeptoo.KButton btnDeletePub;
-    private keeptoo.KButton btnUpdateCat;
-    private keeptoo.KButton btnUpdatePub;
+    private javax.swing.JButton btnDeleteCat;
+    private javax.swing.JButton btnDeletePub;
+    private javax.swing.JButton btnUpdateCat;
+    private javax.swing.JButton btnUpdatePub;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -816,11 +839,13 @@ public class Form_CatAndPub extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbImage;
     private javax.swing.JLayeredPane panel;
     private javax.swing.JLayeredPane panel2;
     private javax.swing.JLayeredPane panel3;
     private com.softech.bookmanagement.swing.PanelBorder panelBorder1;
+    private com.softech.bookmanagement.swing.SearchText searchcat;
     private javax.swing.JScrollPane spTable;
     private javax.swing.JScrollPane spTable1;
     private com.softech.bookmanagement.swing.Table tblCategory;

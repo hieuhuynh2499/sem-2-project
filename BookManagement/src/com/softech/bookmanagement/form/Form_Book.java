@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class Form_Book extends javax.swing.JPanel {
     DefaultTableModel tblModel;
     SetImage img = new SetImage();
+    
     String imgFile ="";
     public Form_Book() {
         initComponents();
@@ -31,6 +32,12 @@ public class Form_Book extends javax.swing.JPanel {
         LoadPublisher();
         initTable();
         LoadBook();
+        btnAdd.setSize(20, 20);
+        new SetImage().setImageButton(btnAdd, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\add.png");
+        btnUpdate.setSize(20, 20);
+        new SetImage().setImageButton(btnUpdate, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\pencil.png");
+        btnDelete.setSize(20, 20);
+        new SetImage().setImageButton(btnDelete, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\bin.png");
     }
     void initTable(){
         try{
@@ -111,6 +118,49 @@ public class Form_Book extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }
+    void SearchBook(){
+         String sql = "Select * from Book where Title like '%?%' or Author like '%?%'";
+       String Cat ="";
+       String Pub = "";
+        try {      
+            PreparedStatement ps = DatabaseHelper.connectSQLServer().prepareStatement(sql);
+            ps.setString(1, searchbook.toString());
+            ps.setString(2, searchbook.toString());
+            ResultSet rs = ps.executeQuery(); 
+            tblModel.setRowCount(0);
+            while(rs.next()){
+                String getCat= "Select CategoryName from Category where CategoryID = ? ";
+                PreparedStatement psGetCat = DatabaseHelper.connectSQLServer().prepareStatement(getCat);
+                psGetCat.setString(1, rs.getString("CategoryID"));
+                ResultSet rsGetCat = psGetCat.executeQuery();
+                while(rsGetCat.next()){
+                    Cat = rsGetCat.getString("CategoryName");
+                }
+                String getPub= "Select PublisherName from Publisher where PublisherID = ?";
+                PreparedStatement psGetPub = DatabaseHelper.connectSQLServer().prepareStatement(getPub);
+                psGetPub.setString(1, rs.getString("PublisherID"));
+                ResultSet rsGetPub = psGetPub.executeQuery();       
+                while(rsGetPub.next()){
+                    Pub = rsGetPub.getString("PublisherName");
+                }   
+                
+                String[] row = new String[]{
+                    rs.getString("ISBN"),
+                    rs.getString("Title"),
+                    rs.getString("Author"),
+                    Cat,
+                    Pub,
+                    rs.getString("Price"),
+                    rs.getString("Description"),
+                    rs.getString("Image")
+                };
+                tblModel.addRow(row);
+            }
+            tblModel.fireTableDataChanged();
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -139,12 +189,16 @@ public class Form_Book extends javax.swing.JPanel {
         panel3 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
         lbImage = new javax.swing.JLabel();
-        btnAdd = new keeptoo.KButton();
-        btnUpdate = new keeptoo.KButton();
-        btnDelete = new keeptoo.KButton();
         btnBrowser = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        searchbook = new com.softech.bookmanagement.swing.SearchText();
 
         setBackground(new java.awt.Color(242, 242, 242));
+        setRequestFocusEnabled(false);
 
         panel.setRequestFocusEnabled(false);
 
@@ -366,62 +420,49 @@ public class Form_Book extends javax.swing.JPanel {
             .addComponent(lbImage, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
         );
 
-        btnAdd.setText("ADD");
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnAdd.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnAdd.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnAdd.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnAdd.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnAdd.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnAdd.setkStartColor(new java.awt.Color(63, 43, 150));
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-
-        btnUpdate.setText("UPDATE");
-        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnUpdate.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnUpdate.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnUpdate.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnUpdate.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnUpdate.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnUpdate.setkStartColor(new java.awt.Color(63, 43, 150));
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setText("DELETE");
-        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDelete.setkEndColor(new java.awt.Color(168, 192, 255));
-        btnDelete.setkHoverEndColor(new java.awt.Color(63, 43, 150));
-        btnDelete.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnDelete.setkHoverStartColor(new java.awt.Color(168, 192, 255));
-        btnDelete.setkPressedColor(new java.awt.Color(204, 204, 204));
-        btnDelete.setkSelectedColor(new java.awt.Color(63, 43, 150));
-        btnDelete.setkStartColor(new java.awt.Color(63, 43, 150));
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
-        btnBrowser.setText("Browser");
+        btnBrowser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/softech/bookmanagement/icon/open-folder.png"))); // NOI18N
+        btnBrowser.setText("Browse");
         btnBrowser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBrowserActionPerformed(evt);
             }
         });
 
+        btnAdd.setBackground(new java.awt.Color(63, 43, 150));
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdd.setText("   ADD");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setBackground(new java.awt.Color(63, 43, 150));
+        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdate.setText("  UPDATE");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setBackground(new java.awt.Color(63, 43, 150));
+        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setText("   DELETE");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         panel3.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel3.setLayer(btnBrowser, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(btnAdd, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(btnUpdate, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(btnDelete, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel3.setLayer(btnBrowser, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
         panel3.setLayout(panel3Layout);
@@ -437,9 +478,9 @@ public class Form_Book extends javax.swing.JPanel {
                         .addComponent(btnBrowser, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,16 +488,48 @@ public class Form_Book extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel3Layout.createSequentialGroup()
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel3Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnBrowser)))
-                .addGap(34, 34, 34))
+                        .addComponent(btnBrowser))
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/softech/bookmanagement/icon/search.png"))); // NOI18N
+
+        searchbook.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        searchbook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchbookActionPerformed(evt);
+            }
+        });
+        searchbook.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchbookKeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchbook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+            .addComponent(searchbook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -466,32 +539,90 @@ public class Form_Book extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
+                    .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, 934, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panel3)))
-                .addGap(20, 20, 20))
+                .addGap(21, 21, 21))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panel)
                     .addComponent(panel3)
                     .addComponent(panel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTitleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTitleActionPerformed
+
+    private void tblBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBookMouseClicked
+        tblModel = (DefaultTableModel) tblBook.getModel();
+        int selectedrowindex = tblBook.getSelectedRow();
+        txtISBN.setText(tblModel.getValueAt(selectedrowindex, 0).toString());
+        try
+        {
+            String sql = "Select * from Book where ISBN = ?";
+            PreparedStatement pstmt1 =  DatabaseHelper.connectSQLServer().prepareStatement(sql);
+            pstmt1.setString(1, txtISBN.getText());
+            ResultSet rs1 = pstmt1.executeQuery();
+            if (rs1.next()) {
+                txtTitle.setText(rs1.getString("Title"));
+                txtAuthor.setText(rs1.getString("Author"));
+                cbCategory.setSelectedItem(tblModel.getValueAt(selectedrowindex, 3).toString());
+                cbPublisher.setSelectedItem(tblModel.getValueAt(selectedrowindex, 4).toString());
+                txtPrice.setText(rs1.getString("Price"));
+                txtDescription.setText(rs1.getString("Description"));
+                if(rs1.getString("Image") != null)
+                {
+                    img.setImageLabel(lbImage, "image//" + rs1.getString("Image"));
+                }
+                else
+                {
+                    lbImage.setIcon(null);
+                }
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_tblBookMouseClicked
+
+    private void btnBrowserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowserActionPerformed
+        JFileChooser fileChooser = new JFileChooser("image");
+        FileFilter filter = new FileNameExtensionFilter("*.Images", "gjf", "jpg", "png");
+        fileChooser.addChoosableFileFilter(filter);
+   
+        fileChooser.setMultiSelectionEnabled(false);
+
+        int action = fileChooser.showOpenDialog(this);
+        if (action == JFileChooser.APPROVE_OPTION) {
+            while (true) {
+                if (!fileChooser.getSelectedFile().getName().matches("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")) {
+                    JOptionPane.showMessageDialog(null, "Định dạng file hình đuôi phải là GIF, JPG, PNG !");
+                    return;
+                } else {
+                    break;
+                }
+            }
+            File selectedFile = fileChooser.getSelectedFile();
+            String Path = selectedFile.getAbsolutePath();
+            imgFile = fileChooser.getSelectedFile().getName();
+//            txtHinh.setText(imgFile);
+            img.setImageLabel(lbImage, "image//" + imgFile);
+        }
+    }//GEN-LAST:event_btnBrowserActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         String PublisherID = "";
@@ -587,7 +718,6 @@ public class Form_Book extends javax.swing.JPanel {
             e.printStackTrace();
             MessageDialogHelper.showErrorDialog(null,e.getMessage(), "error");
         }
-        
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -603,68 +733,20 @@ public class Form_Book extends javax.swing.JPanel {
         LoadBook();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void tblBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBookMouseClicked
-        tblModel = (DefaultTableModel) tblBook.getModel();
-        int selectedrowindex = tblBook.getSelectedRow();
-        txtISBN.setText(tblModel.getValueAt(selectedrowindex, 0).toString());
-        try
-        {
-            String sql = "Select * from Book where ISBN = ?";
-            PreparedStatement pstmt1 =  DatabaseHelper.connectSQLServer().prepareStatement(sql);
-            pstmt1.setString(1, txtISBN.getText());
-            ResultSet rs1 = pstmt1.executeQuery();
-            if (rs1.next()) {
-                txtTitle.setText(rs1.getString("Title"));
-                txtAuthor.setText(rs1.getString("Author"));
-                cbCategory.setSelectedItem(tblModel.getValueAt(selectedrowindex, 3).toString());
-                cbPublisher.setSelectedItem(tblModel.getValueAt(selectedrowindex, 4).toString());
-                txtPrice.setText(rs1.getString("Price"));
-                txtDescription.setText(rs1.getString("Description"));
-                if(rs1.getString("Image") != null)
-                {
-                    img.setImageLabel(lbImage, "image//" + rs1.getString("Image"));
-                }
-                else
-                {
-                    lbImage.setIcon(null);
-                }
-            }
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-        }
-    }//GEN-LAST:event_tblBookMouseClicked
+    private void searchbookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbookActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchbookActionPerformed
 
-    private void btnBrowserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowserActionPerformed
-        JFileChooser fileChooser = new JFileChooser("image");
-        FileFilter filter = new FileNameExtensionFilter("*.Images", "gjf", "jpg", "png");
-        fileChooser.addChoosableFileFilter(filter);
-   
-        fileChooser.setMultiSelectionEnabled(false);
-
-        int action = fileChooser.showOpenDialog(this);
-        if (action == JFileChooser.APPROVE_OPTION) {
-            while (true) {
-                if (!fileChooser.getSelectedFile().getName().matches("([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)")) {
-                    JOptionPane.showMessageDialog(null, "Định dạng file hình đuôi phải là GIF, JPG, PNG !");
-                    return;
-                } else {
-                    break;
-                }
-            }
-            File selectedFile = fileChooser.getSelectedFile();
-            String Path = selectedFile.getAbsolutePath();
-            imgFile = fileChooser.getSelectedFile().getName();
-//            txtHinh.setText(imgFile);
-            img.setImageLabel(lbImage, "image//" + imgFile);
-        }
-    }//GEN-LAST:event_btnBrowserActionPerformed
+    private void searchbookKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchbookKeyTyped
+//       SearchBook();
+    }//GEN-LAST:event_searchbookKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private keeptoo.KButton btnAdd;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBrowser;
-    private keeptoo.KButton btnDelete;
-    private keeptoo.KButton btnUpdate;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cbCategory;
     private javax.swing.JComboBox<String> cbPublisher;
     private javax.swing.JLabel jLabel1;
@@ -675,13 +757,16 @@ public class Form_Book extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbImage;
     private javax.swing.JLayeredPane panel;
     private javax.swing.JLayeredPane panel2;
     private javax.swing.JLayeredPane panel3;
     private com.softech.bookmanagement.swing.PanelBorder panelBorder1;
+    private com.softech.bookmanagement.swing.SearchText searchbook;
     private javax.swing.JScrollPane spTable;
     private com.softech.bookmanagement.swing.Table tblBook;
     private javax.swing.JTextField txtAuthor;
