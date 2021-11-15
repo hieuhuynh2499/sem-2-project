@@ -12,6 +12,8 @@ import com.softech.bookmanagement.model.EmployeeDAO;
 import com.softech.bookmanagement.model.Publisher;
 import com.softech.bookmanagement.model.PublisherDAO;
 import com.softech.bookmanagement.model.SetImage;
+import java.awt.Point;
+import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,15 +30,17 @@ import javax.swing.table.DefaultTableModel;
  * @author Nguyen Bae
  */
 public class Form_CatAndPub extends javax.swing.JPanel {
+
     private DefaultTableModel tblModel;
     SetImage img = new SetImage();
-    String imgFile ="";
+    String imgFile = "";
     private JFrame mainFrame;
+
     public Form_CatAndPub() {
         initComponents();
-        initTableCate ();
+        initTableCate();
         loadTableCate();
-        initTablePub ();
+        initTablePub();
         loadTablePub();
         btnAddPub.setSize(20, 20);
         new SetImage().setImageButton(btnAddPub, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\add.png");
@@ -50,54 +54,72 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         new SetImage().setImageButton(btnUpdateCat, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\pencil.png");
         btnDeleteCat.setSize(20, 20);
         new SetImage().setImageButton(btnDeleteCat, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\bin.png");
+        btnClear.setSize(20, 20);
+        new SetImage().setImageButton(btnClear, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\clear.png");
+        rbCategory.setSelected(true);
     }
 
-    private void initTableCate (){
-         tblModel = new DefaultTableModel();
-         tblModel.setColumnIdentifiers(new String[]{"CategoryId","CategoryName"});
-         tblCategory.setModel(tblModel); 
+    private void initTableCate() {
+        tblModel = new DefaultTableModel();
+        tblModel.setColumnIdentifiers(new String[]{"CategoryId", "CategoryName"});
+        tblCategory.setModel(tblModel);
     }
-    private void loadTableCate(){
-        try{
+
+    private void loadTableCate() {
+        try {
             CategoryDAO dao = new CategoryDAO();
             List<Category> list = dao.findAll();
             tblModel.setRowCount(0);
-            for(Category em:list){
+            for (Category em : list) {
                 tblModel.addRow(new Object[]{
-                    em.getCategoryId(),em.getCategoryName()
+                    em.getCategoryId(), em.getCategoryName()
                 });
             }
             tblModel.fireTableDataChanged();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             MessageDialogHelper.showErrorDialog(null, e.getMessage(), "error");
         }
     }
-    private void initTablePub (){
-         tblModel = new DefaultTableModel();
-         tblModel.setColumnIdentifiers(new String[]{"PublisherID","PublisherName","PublisherPhone","PublisherPhone","PublisheEmail","Image"});
-         tblPublisher.setModel(tblModel); 
+
+    private void initTablePub() {
+        tblModel = new DefaultTableModel();
+        tblModel.setColumnIdentifiers(new String[]{"PublisherID", "PublisherName", "PublisherPhone", "PublisherPhone", "PublisheEmail", "Image"});
+        tblPublisher.setModel(tblModel);
     }
-    private void loadTablePub(){
-        try{
+
+    private void loadTablePub() {
+        try {
             PublisherDAO dao = new PublisherDAO();
             List<Publisher> list = dao.findAll();
             tblModel.setRowCount(0);
-            for(Publisher em:list){
+            for (Publisher em : list) {
                 tblModel.addRow(new Object[]{
-                   em.getID(),em.getPushlisherNameString(),em.getPhone(),em.getAddress(),em.getEmail(),em.getImage()
+                    em.getID(), em.getPushlisherNameString(), em.getPhone(), em.getAddress(), em.getEmail(), em.getImage()
                 });
             }
             tblModel.fireTableDataChanged();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             MessageDialogHelper.showErrorDialog(null, e.getMessage(), "error");
         }
     }
+
+    public boolean checkMouseOver(Point mouse) {
+        int width = txtSearch.getWidth();
+        int height = txtSearch.getHeight();
+        int marginButton = 5;
+        int buttonSize = height - marginButton * 2;
+        Point point = new Point(width - height + 3, marginButton);
+        Ellipse2D.Double circle = new Ellipse2D.Double(point.x, point.y, buttonSize, buttonSize);
+        return circle.contains(mouse);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         panel = new javax.swing.JLayeredPane();
         txtCategoryName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -112,6 +134,10 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         tblCategory = new com.softech.bookmanagement.swing.Table();
         spTable1 = new javax.swing.JScrollPane();
         tblPublisher = new com.softech.bookmanagement.swing.Table();
+        txtSearch = new com.softech.bookmanagement.swing.SeachTextField();
+        jPanel2 = new javax.swing.JPanel();
+        rbCategory = new javax.swing.JRadioButton();
+        rbPublisher = new javax.swing.JRadioButton();
         panel2 = new javax.swing.JLayeredPane();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -122,7 +148,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         txtPublisherEmail = new javax.swing.JTextField();
         txtPublisherName = new javax.swing.JTextField();
-        txtPublicName = new javax.swing.JLabel();
+        lbPublicName = new javax.swing.JLabel();
         panel3 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
         lbImage = new javax.swing.JLabel();
@@ -130,9 +156,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         btnAddPub = new javax.swing.JButton();
         btnUpdatePub = new javax.swing.JButton();
         btnDeletePub = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        searchcat = new com.softech.bookmanagement.swing.SearchText();
+        btnClear = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(242, 242, 242));
         setPreferredSize(new java.awt.Dimension(919, 751));
@@ -275,6 +299,49 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         });
         spTable1.setViewportView(tblPublisher);
 
+        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSearchMouseClicked(evt);
+            }
+        });
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        rbCategory.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rbCategory);
+        rbCategory.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbCategory.setText("Category");
+
+        rbPublisher.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rbPublisher);
+        rbPublisher.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbPublisher.setText("Publisher");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rbCategory)
+                .addGap(70, 70, 70)
+                .addComponent(rbPublisher)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbCategory)
+                    .addComponent(rbPublisher)))
+        );
+
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
@@ -283,22 +350,28 @@ public class Form_CatAndPub extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(spTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
                     .addComponent(spTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -356,9 +429,9 @@ public class Form_CatAndPub extends javax.swing.JPanel {
             }
         });
 
-        txtPublicName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtPublicName.setForeground(new java.awt.Color(63, 43, 150));
-        txtPublicName.setText("Publisher Name");
+        lbPublicName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbPublicName.setForeground(new java.awt.Color(63, 43, 150));
+        lbPublicName.setText("Publisher Name");
 
         panel2.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel2.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -369,7 +442,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         panel2.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel2.setLayer(txtPublisherEmail, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel2.setLayer(txtPublisherName, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        panel2.setLayer(txtPublicName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel2.setLayer(lbPublicName, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
@@ -388,7 +461,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
-                            .addComponent(txtPublicName))
+                            .addComponent(lbPublicName))
                         .addGap(0, 136, Short.MAX_VALUE))
                     .addComponent(txtPublisherName, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -401,7 +474,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPublisherId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPublicName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbPublicName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtPublisherName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -471,11 +544,22 @@ public class Form_CatAndPub extends javax.swing.JPanel {
             }
         });
 
+        btnClear.setBackground(new java.awt.Color(63, 43, 150));
+        btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnClear.setForeground(new java.awt.Color(255, 255, 255));
+        btnClear.setText("   CLEAR");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
         panel3.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(btnBrowser, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(btnAddPub, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(btnUpdatePub, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(btnDeletePub, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel3.setLayer(btnClear, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
         panel3.setLayout(panel3Layout);
@@ -493,7 +577,8 @@ public class Form_CatAndPub extends javax.swing.JPanel {
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAddPub, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                     .addComponent(btnUpdatePub, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                    .addComponent(btnDeletePub, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
+                    .addComponent(btnDeletePub, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,52 +586,26 @@ public class Form_CatAndPub extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel3Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBrowser))
-                    .addGroup(panel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(btnAddPub, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnUpdatePub, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDeletePub, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(60, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/softech/bookmanagement/icon/search.png"))); // NOI18N
-
-        searchcat.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        searchcat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchcatActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchcat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-            .addComponent(searchcat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDeletePub, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBrowser)))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -555,20 +614,18 @@ public class Form_CatAndPub extends javax.swing.JPanel {
                         .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                         .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -593,30 +650,27 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         tblModel = (DefaultTableModel) tblPublisher.getModel();
         int selectedrowindex = tblPublisher.getSelectedRow();
         txtPublisherId.setText(tblModel.getValueAt(selectedrowindex, 0).toString());
-        try{
-        String sql = "Select * from Publisher where PublisherID = ?";
-        PreparedStatement pstmt1 =  DatabaseHelper.connectSQLServer().prepareStatement(sql);
+        try {
+            String sql = "Select * from Publisher where PublisherID = ?";
+            PreparedStatement pstmt1 = DatabaseHelper.connectSQLServer().prepareStatement(sql);
             pstmt1.setString(1, txtPublisherId.getText());
             ResultSet rs1 = pstmt1.executeQuery();
             if (rs1.next()) {
                 String Name = rs1.getString("PublisherName");
-                 txtPublisherName.setText(Name);
+                txtPublisherName.setText(Name);
                 String Phone = rs1.getString("Phone");
                 txtPublisherPhone.setText(Phone);
                 String Address = rs1.getString("Address");
                 txtPublisherAddress.setText(Address);
                 String Email = rs1.getString("Email");
                 txtPublisherEmail.setText(Email);
-                if(rs1.getString("Image") != null)
-                {
+                if (rs1.getString("Image") != null) {
                     img.setImageLabel(lbImage, "image//" + rs1.getString("Image"));
-                }
-                else
-                {
+                } else {
                     lbImage.setIcon(null);
                 }
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_tblPublisherMouseClicked
@@ -625,7 +679,7 @@ public class Form_CatAndPub extends javax.swing.JPanel {
         JFileChooser fileChooser = new JFileChooser("image");
         FileFilter filter = new FileNameExtensionFilter("*.Images", "gjf", "jpg", "png");
         fileChooser.addChoosableFileFilter(filter);
-   
+
         fileChooser.setMultiSelectionEnabled(false);
 
         int action = fileChooser.showOpenDialog(this);
@@ -648,17 +702,17 @@ public class Form_CatAndPub extends javax.swing.JPanel {
 
     private void btnAddPubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPubActionPerformed
         // TODO add your handling code here:
-         StringBuilder sb = new StringBuilder();
-        DataValidator.validateEmpty(txtPublisherId, sb," PublisherId is not empty");
-        DataValidator.validateEmpty(txtPublisherName, sb," PublisherName is not empty");
-        DataValidator.validateEmpty(txtPublisherEmail, sb," PublisherEmail is not empty");
-         DataValidator.validateEmpty(txtPublisherAddress, sb," PublisherAddress is not empty");
-         DataValidator.validateEmpty(txtPublisherPhone, sb," PublisherPhone is not empty");
-        if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(),"ERROR");
-            return ;
+        StringBuilder sb = new StringBuilder();
+        DataValidator.validateEmpty(txtPublisherId, sb, " PublisherId is not empty");
+        DataValidator.validateEmpty(txtPublisherName, sb, " PublisherName is not empty");
+        DataValidator.validateEmpty(txtPublisherEmail, sb, " PublisherEmail is not empty");
+        DataValidator.validateEmpty(txtPublisherAddress, sb, " PublisherAddress is not empty");
+        DataValidator.validateEmpty(txtPublisherPhone, sb, " PublisherPhone is not empty");
+        if (sb.length() > 0) {
+            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(), "ERROR");
+            return;
         }
-        try{
+        try {
             Publisher publisher = new Publisher();
             publisher.setID(txtPublisherId.getText());
             publisher.setPushlisherNameString(txtPublisherName.getText());
@@ -668,9 +722,9 @@ public class Form_CatAndPub extends javax.swing.JPanel {
             publisher.setImage(imgFile);
             PublisherDAO puclisherDAO = new PublisherDAO();
             puclisherDAO.insert(publisher);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame, e.getMessage(), "error");
         }
         initTablePub();
         loadTablePub();
@@ -678,17 +732,17 @@ public class Form_CatAndPub extends javax.swing.JPanel {
 
     private void btnUpdatePubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePubActionPerformed
         // TODO add your handling code here:
-         StringBuilder sb = new StringBuilder();
-        DataValidator.validateEmpty(txtPublisherId, sb," PublisherId is not empty");
-        DataValidator.validateEmpty(txtPublisherName, sb," PublisherName is not empty");
-        DataValidator.validateEmpty(txtPublisherEmail, sb," PublisherEmail is not empty");
-         DataValidator.validateEmpty(txtPublisherAddress, sb," PublisherAddress is not empty");
-         DataValidator.validateEmpty(txtPublisherPhone, sb," PublisherPhone is not empty");
-        if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
-            return ;
+        StringBuilder sb = new StringBuilder();
+        DataValidator.validateEmpty(txtPublisherId, sb, " PublisherId is not empty");
+        DataValidator.validateEmpty(txtPublisherName, sb, " PublisherName is not empty");
+        DataValidator.validateEmpty(txtPublisherEmail, sb, " PublisherEmail is not empty");
+        DataValidator.validateEmpty(txtPublisherAddress, sb, " PublisherAddress is not empty");
+        DataValidator.validateEmpty(txtPublisherPhone, sb, " PublisherPhone is not empty");
+        if (sb.length() > 0) {
+            MessageDialogHelper.showErrorDialog(null, sb.toString(), "ERROR");
+            return;
         }
-        try{
+        try {
             Publisher publisher = new Publisher();
             publisher.setID(txtPublisherId.getText());
             publisher.setPushlisherNameString(txtPublisherName.getText());
@@ -698,9 +752,9 @@ public class Form_CatAndPub extends javax.swing.JPanel {
             publisher.setImage(imgFile);
             PublisherDAO puclisherDAO = new PublisherDAO();
             puclisherDAO.update(publisher);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame, e.getMessage(), "error");
         }
         initTablePub();
         loadTablePub();
@@ -709,25 +763,25 @@ public class Form_CatAndPub extends javax.swing.JPanel {
     private void btnDeletePubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePubActionPerformed
         // TODO add your handling code here:
         StringBuilder sb = new StringBuilder();
-        if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(null, sb.toString(),"ERROR");
-            return ;
-        }
-        
-        if(MessageDialogHelper.showConfirmDialog(null,"are you sure","question") == JOptionPane.NO_OPTION){
+        if (sb.length() > 0) {
+            MessageDialogHelper.showErrorDialog(null, sb.toString(), "ERROR");
             return;
         }
-        
-        try{
+
+        if (MessageDialogHelper.showConfirmDialog(null, "are you sure", "question") == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        try {
             PublisherDAO publisherDAO = new PublisherDAO();
-            if(publisherDAO.delete(txtPublisherId.getText())){
-                MessageDialogHelper.showMessageDialog(mainFrame,"Publisher is delete success", "notification");
-            }else{
+            if (publisherDAO.delete(txtPublisherId.getText())) {
+                MessageDialogHelper.showMessageDialog(mainFrame, "Publisher is delete success", "notification");
+            } else {
                 MessageDialogHelper.showConfirmDialog(mainFrame, "Publisher is delete failed", "notification");
-            } 
-        }catch(Exception e){
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame, e.getMessage(), "error");
         }
         initTablePub();
         loadTablePub();
@@ -736,27 +790,27 @@ public class Form_CatAndPub extends javax.swing.JPanel {
     private void btnAddCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCatActionPerformed
         // TODO add your handling code here:
         StringBuilder sb = new StringBuilder();
-        DataValidator.validateEmpty(txtCategoryId, sb," Category is not empty");
-        DataValidator.validateEmpty(txtCategoryName, sb," CategoryName is not empty");
-  
-        if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(),"ERROR");
-            return ;
+        DataValidator.validateEmpty(txtCategoryId, sb, " Category is not empty");
+        DataValidator.validateEmpty(txtCategoryName, sb, " CategoryName is not empty");
+
+        if (sb.length() > 0) {
+            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(), "ERROR");
+            return;
         }
-        try{
+        try {
             Category cate = new Category();
-           cate.setCategoryId(txtCategoryId.getText());
-           cate.setCategoryName(txtCategoryName.getText());
+            cate.setCategoryId(txtCategoryId.getText());
+            cate.setCategoryName(txtCategoryName.getText());
             CategoryDAO cateDAO = new CategoryDAO();
-            if(cateDAO.insert(cate)){
-                MessageDialogHelper.showMessageDialog(mainFrame,"Category is saved in database", "notification");
-            }else{
+            if (cateDAO.insert(cate)) {
+                MessageDialogHelper.showMessageDialog(mainFrame, "Category is saved in database", "notification");
+            } else {
                 MessageDialogHelper.showConfirmDialog(mainFrame, "Category is save failed", "notification");
             }
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame, e.getMessage(), "error");
         }
         initTableCate();
         loadTableCate();
@@ -765,27 +819,27 @@ public class Form_CatAndPub extends javax.swing.JPanel {
     private void btnUpdateCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCatActionPerformed
         // TODO add your handling code here:
         StringBuilder sb = new StringBuilder();
-        DataValidator.validateEmpty(txtCategoryId, sb," Category is not empty");
-        DataValidator.validateEmpty(txtCategoryName, sb," CategoryName is not empty");
-  
-        if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(),"ERROR");
-            return ;
+        DataValidator.validateEmpty(txtCategoryId, sb, " Category is not empty");
+        DataValidator.validateEmpty(txtCategoryName, sb, " CategoryName is not empty");
+
+        if (sb.length() > 0) {
+            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(), "ERROR");
+            return;
         }
-        try{
+        try {
             Category cate = new Category();
-           cate.setCategoryId(txtCategoryId.getText());
-           cate.setCategoryName(txtCategoryName.getText());
+            cate.setCategoryId(txtCategoryId.getText());
+            cate.setCategoryName(txtCategoryName.getText());
             CategoryDAO cateDAO = new CategoryDAO();
-            if(cateDAO.update(cate)){
-                MessageDialogHelper.showMessageDialog(mainFrame,"Category is saved in database", "notification");
-            }else{
+            if (cateDAO.update(cate)) {
+                MessageDialogHelper.showMessageDialog(mainFrame, "Category is saved in database", "notification");
+            } else {
                 MessageDialogHelper.showConfirmDialog(mainFrame, "Category is save failed", "notification");
             }
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame, e.getMessage(), "error");
         }
         initTableCate();
         loadTableCate();
@@ -793,46 +847,96 @@ public class Form_CatAndPub extends javax.swing.JPanel {
 
     private void btnDeleteCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCatActionPerformed
         // TODO add your handling code here:
-         StringBuilder sb = new StringBuilder();
-        if(sb.length() > 0){
-            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(),"ERROR");
-            return ;
-        }
-        
-        if(MessageDialogHelper.showConfirmDialog(mainFrame,"are you sure","question") == JOptionPane.NO_OPTION){
+        StringBuilder sb = new StringBuilder();
+        if (sb.length() > 0) {
+            MessageDialogHelper.showErrorDialog(mainFrame, sb.toString(), "ERROR");
             return;
         }
-        
-        try{
+
+        if (MessageDialogHelper.showConfirmDialog(mainFrame, "are you sure", "question") == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        try {
             CategoryDAO cateDAO = new CategoryDAO();
-            if(cateDAO.delete(txtCategoryId.getText())){
-                MessageDialogHelper.showMessageDialog(mainFrame,"Employee is delete success", "notification");
-            }else{
+            if (cateDAO.delete(txtCategoryId.getText())) {
+                MessageDialogHelper.showMessageDialog(mainFrame, "Employee is delete success", "notification");
+            } else {
                 MessageDialogHelper.showConfirmDialog(mainFrame, "Employee is delete failed", "notification");
-            } 
-        }catch(Exception e){
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-            MessageDialogHelper.showErrorDialog(mainFrame,e.getMessage(), "error");
+            MessageDialogHelper.showErrorDialog(mainFrame, e.getMessage(), "error");
         }
         initTableCate();
         loadTableCate();
     }//GEN-LAST:event_btnDeleteCatActionPerformed
 
-    private void searchcatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchcatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchcatActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        txtCategoryId.setText("");
+        txtCategoryName.setText("");
+        txtPublisherName.setText("");
+        txtPublisherAddress.setText("");
+        txtPublisherEmail.setText("");
+        txtPublisherId.setText("");
+        txtPublisherPhone.setText("");
+        lbImage.setIcon(null);
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
+        if (checkMouseOver(evt.getPoint())) {
+            if (rbCategory.isSelected()) {
+                initTableCate();
+                try {
+                    CategoryDAO dao = new CategoryDAO();
+                    List<Category> list = dao.SearchByCatName(txtSearch.getText());
+                    tblModel.setRowCount(0);
+                    for (Category em : list) {
+                        tblModel.addRow(new Object[]{
+                            em.getCategoryId(), em.getCategoryName()
+                        });
+                    }
+                    tblModel.fireTableDataChanged();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    MessageDialogHelper.showErrorDialog(null, e.getMessage(), "error");
+                }
+            } else if (rbPublisher.isSelected()) {
+                initTablePub();
+                try {
+                    PublisherDAO dao = new PublisherDAO();
+                    List<Publisher> list = dao.SearchByPubName(txtSearch.getText());
+                    tblModel.setRowCount(0);
+                    for (Publisher em : list) {
+                        tblModel.addRow(new Object[]{
+                            em.getID(), em.getPushlisherNameString(), em.getPhone(), em.getAddress(), em.getEmail(), em.getImage()
+                        });
+                    }
+                    tblModel.fireTableDataChanged();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    MessageDialogHelper.showErrorDialog(null, e.getMessage(), "error");
+                }
+            }
+        }
+    }//GEN-LAST:event_txtSearchMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddCat;
     private javax.swing.JButton btnAddPub;
     private javax.swing.JButton btnBrowser;
+    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDeleteCat;
     private javax.swing.JButton btnDeletePub;
     private javax.swing.JButton btnUpdateCat;
     private javax.swing.JButton btnUpdatePub;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -840,24 +944,26 @@ public class Form_CatAndPub extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbImage;
+    private javax.swing.JLabel lbPublicName;
     private javax.swing.JLayeredPane panel;
     private javax.swing.JLayeredPane panel2;
     private javax.swing.JLayeredPane panel3;
     private com.softech.bookmanagement.swing.PanelBorder panelBorder1;
-    private com.softech.bookmanagement.swing.SearchText searchcat;
+    private javax.swing.JRadioButton rbCategory;
+    private javax.swing.JRadioButton rbPublisher;
     private javax.swing.JScrollPane spTable;
     private javax.swing.JScrollPane spTable1;
     private com.softech.bookmanagement.swing.Table tblCategory;
     private com.softech.bookmanagement.swing.Table tblPublisher;
     private javax.swing.JTextField txtCategoryId;
     private javax.swing.JTextField txtCategoryName;
-    private javax.swing.JLabel txtPublicName;
     private javax.swing.JTextField txtPublisherAddress;
     private javax.swing.JTextField txtPublisherEmail;
     private javax.swing.JTextField txtPublisherId;
     private javax.swing.JTextField txtPublisherName;
     private javax.swing.JTextField txtPublisherPhone;
+    private com.softech.bookmanagement.swing.SeachTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

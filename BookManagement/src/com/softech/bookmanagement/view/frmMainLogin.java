@@ -302,12 +302,12 @@ public class frmMainLogin extends javax.swing.JFrame {
             {
                 frmAdminManagement admin = new frmAdminManagement(txtUsername.getText());
                 admin.setVisible(true);
-                dispose();
+                this.dispose();
             }else
             {
                 frmEmployeeManagement employee = new frmEmployeeManagement(txtUsername.getText());
                 employee.setVisible(true);
-                dispose();
+                this.dispose();
             }
         }
         catch(Exception ex)

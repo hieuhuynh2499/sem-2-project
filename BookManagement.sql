@@ -80,7 +80,7 @@ CREATE TABLE OrderDetail(
 
 
 ALTER TABLE [Order]
-  ADD NameUser VARCHAR(200),
+  ADD NameUser VARCHAR(200);
 
 ALTER TABLE [Order]
   DROP COLUMN [Description];
@@ -94,7 +94,7 @@ ALTER TABLE [Order]
 
 DROP TABLE OrderDetail;
 CREATE TABLE OrderDetail(
-	OrderDetailID VARCHAR(10) PRIMARY KEY IDENTITY [( 1, 1)],
+	OrderDetailID INT PRIMARY KEY IDENTITY ( 1, 1),
 	NameBook varchar(200) not null,
 	Quantity INT NOT NULL,
 	Price Decimal(2,0) NOT NULL,

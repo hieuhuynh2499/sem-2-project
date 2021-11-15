@@ -48,7 +48,11 @@ public class Form_Profile extends javax.swing.JPanel {
                 txtPhone.setText(rs.getString("Phone"));
                 txtAddress.setText(rs.getString("Address"));
                 System.out.println(rs.getString("Image"));
-                img.setImageLabel(lbImage, "image//" + rs.getString("Image"));
+                if(rs.getString("Image").equals("")){
+                    img.setImageLabel(lbImage, "image//user.png");
+                }else{
+                    img.setImageLabel(lbImage, "image//" + rs.getString("Image"));
+                }
             }
         }
         catch(Exception ex){

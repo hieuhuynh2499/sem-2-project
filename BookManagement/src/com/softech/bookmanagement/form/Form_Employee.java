@@ -8,9 +8,12 @@ package com.softech.bookmanagement.form;
 import com.softech.bookmanagement.helpers.DataValidator;
 import com.softech.bookmanagement.helpers.DatabaseHelper;
 import com.softech.bookmanagement.helpers.MessageDialogHelper;
+import com.softech.bookmanagement.model.Book;
+import com.softech.bookmanagement.model.BookDAO;
 import com.softech.bookmanagement.model.Employee;
 import com.softech.bookmanagement.model.EmployeeDAO;
 import com.softech.bookmanagement.model.SetImage;
+import java.io.Console;
 import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +24,9 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import com.softech.bookmanagement.swing.SeachTextField;
+import java.awt.Point;
+import java.awt.geom.Ellipse2D;
 
 /**
  *
@@ -42,6 +48,8 @@ public class Form_Employee extends javax.swing.JPanel {
         new SetImage().setImageButton(btnUpdate, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\pencil.png");
         btnDelete.setSize(20, 20);
         new SetImage().setImageButton(btnDelete, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\bin.png");
+        btnClear.setSize(20, 20);
+        new SetImage().setImageButton(btnClear, "..\\BookManagement\\src\\com\\softech\\bookmanagement\\icon\\clear.png");
     }
 
     private void initTable (){
@@ -79,10 +87,20 @@ public class Form_Employee extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }
+    public boolean checkMouseOver(Point mouse) {
+        int width = txtSearch.getWidth();
+        int height = txtSearch.getHeight();
+        int marginButton = 5;
+        int buttonSize = height - marginButton * 2;
+        Point point = new Point(width - height + 3, marginButton);
+        Ellipse2D.Double circle = new Ellipse2D.Double(point.x, point.y, buttonSize, buttonSize);
+        return circle.contains(mouse);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         panel = new javax.swing.JLayeredPane();
         txtId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -96,6 +114,11 @@ public class Form_Employee extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         spTable = new javax.swing.JScrollPane();
         tblEmplyee = new com.softech.bookmanagement.swing.Table();
+        txtSearch = new com.softech.bookmanagement.swing.SeachTextField();
+        jPanel2 = new javax.swing.JPanel();
+        rbUsername = new javax.swing.JRadioButton();
+        rbFullname = new javax.swing.JRadioButton();
+        rbRole = new javax.swing.JRadioButton();
         panel2 = new javax.swing.JLayeredPane();
         txtUsername = new javax.swing.JTextField();
         cbRole = new javax.swing.JComboBox<>();
@@ -107,10 +130,7 @@ public class Form_Employee extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        searchemp = new com.softech.bookmanagement.swing.SearchText();
+        btnClear = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(242, 242, 242));
         setPreferredSize(new java.awt.Dimension(919, 751));
@@ -230,6 +250,58 @@ public class Form_Employee extends javax.swing.JPanel {
         });
         spTable.setViewportView(tblEmplyee);
 
+        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSearchMouseClicked(evt);
+            }
+        });
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        rbUsername.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rbUsername);
+        rbUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbUsername.setText("Username");
+
+        rbFullname.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rbFullname);
+        rbFullname.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbFullname.setText("Fullname");
+
+        rbRole.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rbRole);
+        rbRole.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbRole.setText("Role");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rbUsername)
+                .addGap(45, 45, 45)
+                .addComponent(rbFullname)
+                .addGap(45, 45, 45)
+                .addComponent(rbRole)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbUsername)
+                    .addComponent(rbFullname)
+                    .addComponent(rbRole))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
@@ -238,18 +310,25 @@ public class Form_Employee extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(spTable, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spTable))
                 .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -352,10 +431,21 @@ public class Form_Employee extends javax.swing.JPanel {
             }
         });
 
+        btnClear.setBackground(new java.awt.Color(63, 43, 150));
+        btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnClear.setForeground(new java.awt.Color(255, 255, 255));
+        btnClear.setText("   CLEAR");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
         panel3.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(btnAdd, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(btnUpdate, javax.swing.JLayeredPane.DEFAULT_LAYER);
         panel3.setLayer(btnDelete, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel3.setLayer(btnClear, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
         panel3.setLayout(panel3Layout);
@@ -368,12 +458,13 @@ public class Form_Employee extends javax.swing.JPanel {
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                     .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel3Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel3Layout.createSequentialGroup()
@@ -381,48 +472,10 @@ public class Form_Employee extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(75, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/softech/bookmanagement/icon/search.png"))); // NOI18N
-
-        searchemp.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        searchemp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchempActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchemp, javax.swing.GroupLayout.PREFERRED_SIZE, 883, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-            .addComponent(searchemp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -440,20 +493,18 @@ public class Form_Employee extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(panel2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(panel3)
+                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 283, Short.MAX_VALUE)
+                    .addComponent(panel2))
+                .addGap(18, 18, 18)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     private void setFieldEmpty(){
@@ -629,39 +680,102 @@ public class Form_Employee extends javax.swing.JPanel {
         setFieldEmpty();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void searchempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchempActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchempActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        txtId.setText("");
+        txtFullname.setText("");
+        txtAddress.setText("");
+        txtPhone.setText("");
+        txtUsername.setText("");
+        lbImage.setIcon(null);
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+//        System.out.println("Click");
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
+        if (checkMouseOver(evt.getPoint())) {
+            if (rbFullname.isSelected()) {
+                try {
+                    EmployeeDAO dao = new EmployeeDAO();
+                    List<Employee> list = dao.SearchByFullname(txtSearch.getText());
+                    tblModel.setRowCount(0);
+                    for (Employee em : list) {
+                        tblModel.addRow(new Object[]{
+                            em.getUserID(), em.getFullName(), em.getPhone(), em.getAddress(), em.getUsername(), em.getRoleID(), em.getImage()
+                        });
+                    }
+                    tblModel.fireTableDataChanged();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    MessageDialogHelper.showErrorDialog(null, e.getMessage(), "error");
+                }
+            } else if (rbUsername.isSelected()) {
+                try {
+                    EmployeeDAO dao = new EmployeeDAO();
+                    List<Employee> list = dao.SearchByUsername(txtSearch.getText());
+                    tblModel.setRowCount(0);
+                    for (Employee em : list) {
+                        tblModel.addRow(new Object[]{
+                            em.getUserID(), em.getFullName(), em.getPhone(), em.getAddress(), em.getUsername(), em.getRoleID(), em.getImage()
+                        });
+                    }
+                    tblModel.fireTableDataChanged();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    MessageDialogHelper.showErrorDialog(null, e.getMessage(), "error");
+                }
+            } else if (rbRole.isSelected()) {
+                try {
+                    EmployeeDAO dao = new EmployeeDAO();
+                    List<Employee> list = dao.SearchByRole(txtSearch.getText());
+                    tblModel.setRowCount(0);
+                    for (Employee em : list) {
+                        tblModel.addRow(new Object[]{
+                            em.getUserID(), em.getFullName(), em.getPhone(), em.getAddress(), em.getUsername(), em.getRoleID(), em.getImage()
+                        });
+                    }
+                    tblModel.fireTableDataChanged();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    MessageDialogHelper.showErrorDialog(null, e.getMessage(), "error");
+                }
+            }
+        }
+    }//GEN-LAST:event_txtSearchMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbRole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbImage;
     private javax.swing.JLayeredPane panel;
     private javax.swing.JLayeredPane panel2;
     private javax.swing.JLayeredPane panel3;
     private com.softech.bookmanagement.swing.PanelBorder panelBorder1;
-    private com.softech.bookmanagement.swing.SearchText searchemp;
+    private javax.swing.JRadioButton rbFullname;
+    private javax.swing.JRadioButton rbRole;
+    private javax.swing.JRadioButton rbUsername;
     private javax.swing.JScrollPane spTable;
     private com.softech.bookmanagement.swing.Table tblEmplyee;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtFullname;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtPhone;
+    private com.softech.bookmanagement.swing.SeachTextField txtSearch;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,8 +20,8 @@ public class DatabaseHelper {
         String DB_URL = "jdbc:sqlserver://localhost;";
         String DATABASENAME = "database=BookManagement;";
         String USER = "user=sa;";
-        String PASS = "password=123456";
-
+        String PASS = "password=123";
+//        String PASS = "password=123456";
         Class.forName(JDBC_DRIVER);
         Connection connection = DriverManager.getConnection(DB_URL + DATABASENAME + USER + PASS);
         return connection;
