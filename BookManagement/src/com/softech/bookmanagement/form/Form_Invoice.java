@@ -52,7 +52,7 @@ public class Form_Invoice extends javax.swing.JPanel {
      */
      private void initTable (){
         tblModel = new DefaultTableModel();
-        tblModel.setColumnIdentifiers(new String[]{"OrderId","CreateDate","UserID"});
+        tblModel.setColumnIdentifiers(new String[]{"OrderId","Quantity","UserName"});
         tblBook.setModel(tblModel); 
     }
     private void loadTable(){
@@ -62,8 +62,10 @@ public class Form_Invoice extends javax.swing.JPanel {
             tblModel.setRowCount(0);
             for(Order em:list){
                 tblModel.addRow(new Object[]{
-                    em.getOrderId(),em.getCreateDate(),em.getUserID()
+                    
+                    em.getOrderId(),em.getCreateDate(),em.getNameUser()
                 });
+
             }
             tblModel.fireTableDataChanged();
         }catch(Exception e){
@@ -252,7 +254,7 @@ public class Form_Invoice extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addContainerGap(346, Short.MAX_VALUE))
             .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelBorder1Layout.createSequentialGroup()
                     .addGap(46, 46, 46)
@@ -295,7 +297,7 @@ public class Form_Invoice extends javax.swing.JPanel {
 
             },
             new String [] {
-                "OrderId", "CreateDate", "UserID"
+                "OrderId", "Quantity", "UserID"
             }
         ));
         spTable.setViewportView(tblBook12);
@@ -415,7 +417,7 @@ public class Form_Invoice extends javax.swing.JPanel {
             order.setNameUser(cbEmployees.getSelectedItem().toString());
             order.setUserID(idUser);
             OrderDAO orderDao = new OrderDAO();
-            
+            System.out.println(order.getNameUser() + "orderDao");
             
             orderDao.findAll();
             if(orderDao.insert(order)){
@@ -435,6 +437,14 @@ public class Form_Invoice extends javax.swing.JPanel {
                 
                 
                 MessageDialogHelper.showMessageDialog(mainFrame,"order is saved in database", "notification");
+                txtOrderId.setText("");
+                txtQuantity.setText("");
+                tblBook12.setModel(new DefaultTableModel(null,new String[]{"OrderId","Quantity","UserID"}));
+                for (int i = 0; i < listInvoice.size(); i++) {
+                    listInvoice.remove(i);
+                }
+                 loadTable();
+                
             }else{
                 MessageDialogHelper.showConfirmDialog(mainFrame, "order is save failed", "notification");
             }
@@ -445,6 +455,7 @@ public class Form_Invoice extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnCreateOrderActionPerformed
 
+    
     private void tblBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBookMouseClicked
         // TODO add your handling code here:
         int index = tblBook.getSelectedRow();
@@ -454,7 +465,6 @@ public class Form_Invoice extends javax.swing.JPanel {
         orderdetail.pack();
         orderdetail.setLocationRelativeTo(null);
         orderdetail.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
          try
         {
             String sql = "select * from OrderDetail where OrderID = ?";
@@ -463,7 +473,7 @@ public class Form_Invoice extends javax.swing.JPanel {
             pstmt1.setString(1, model.getValueAt(index,0).toString());
             ResultSet rs1 = pstmt1.executeQuery();
             OrderDetailDAO orderdetail1 = new OrderDetailDAO();
-            List<OrderDetail> listorderdetail = orderdetail1.findAll("5");
+            List<OrderDetail> listorderdetail = orderdetail1.findAll(model.getValueAt(index, 0).toString());
             for(OrderDetail employee:listorderdetail){
                PriceTotal += employee.getPrice() * employee.getQuantity();
             }
@@ -475,8 +485,8 @@ public class Form_Invoice extends javax.swing.JPanel {
                 orderdetail.txtOrderDetailId.setText(rs1.getString("OrderID"));
                 orderdetail.txtName.setText(rs2.getString("NameUser"));
                 orderdetail.txtTotal.setText(String.valueOf(PriceTotal));
-                orderdetail.test = 123;
-                System.out.println(orderdetail.test + "sau khi test");
+                orderdetail.loadTable(model.getValueAt(index, 0).toString());
+          
             }
         }catch(Exception ex){
             System.out.println(ex.getMessage());

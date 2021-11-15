@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class OrderDAO {
     public boolean insert(Order order) throws Exception{
-        String sql = "INSERT INTO dbo.[Order] (OrderID,CreateDate,UserID)"+
-                "VALUES(?,?,?)";           
+        String sql = "INSERT INTO dbo.[Order] (OrderID,CreateDate,UserID,NameUser)"+
+                "VALUES(?,?,?,?)";           
         try(
             Connection  con = DatabaseHelper.connectSQLServer(); 
             PreparedStatement pstmt = con.prepareStatement(sql);
@@ -26,6 +26,7 @@ public class OrderDAO {
             pstmt.setString(1,order.getOrderId());
             pstmt.setDate(2,order.getCreateDate());
             pstmt.setString(3,order.getUserID());
+            pstmt.setString(4,order.getNameUser());
             return pstmt.executeUpdate() > 0;
       }
     }
@@ -68,7 +69,7 @@ public class OrderDAO {
                     Order emp = new Order();
                     emp.setOrderId(rs.getString("OrderID"));
                     emp.setCreateDate(rs.getDate("CreateDate"));
-                    emp.setUserID(rs.getString("UserID"));
+                    emp.setNameUser(rs.getString("NameUser"));
                     list.add(emp);
                 }
                 return list;

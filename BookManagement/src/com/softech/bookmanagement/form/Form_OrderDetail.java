@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Form_OrderDetail extends javax.swing.JFrame {
     DefaultTableModel tblModel;
-    public int test = 1;
+     String test = "1";
     /**
      * Creates new form Form_OrderDetail
      */
@@ -26,7 +26,7 @@ public class Form_OrderDetail extends javax.swing.JFrame {
         System.out.println(test + "trc khi test ");
         initComponents();
         initTable();
-        loadTable();
+        loadTable(test);
     }
 
     /**
@@ -205,11 +205,11 @@ public class Form_OrderDetail extends javax.swing.JFrame {
          //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void loadTable() {
+    public void loadTable(String orderid) {
         //To change body of generated methods, choose Tools | Templates.
         try{
             OrderDetailDAO orderDetail = new OrderDetailDAO();
-            List<OrderDetail> list = orderDetail.findAll("5");
+            List<OrderDetail> list = orderDetail.findAll(orderid);
             System.out.println(list.size());
             tblModel.setRowCount(0);
             for(OrderDetail em:list){
